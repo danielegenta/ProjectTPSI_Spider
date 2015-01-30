@@ -9,13 +9,16 @@
 	</head>
 	<body>
 		<div id="mainMenu">
-		<input type="button" value="Nuova partita">
+			<input type="button" value="Nuova partita">
+			<input type="button" value="Hint">
+			<table>
+				<tr><td>Mosse:</td><td><div>qui mosse</div></td></tr>
+				<tr><td>Cronometro:</td><td><div>qui cronometro</div></td></tr>
+				<tr><td>Puntaggio:</td><td><div>qui punteggio</div></td></tr>
+			</table>
 		</div>
-		<div id="topDeck">
-
-		</div>
-		<div id="bottomDeck">
-		
-		</div>
+		<div id="topDeck"></div>
+		<div id="bottomDeck" onclick="distribuisciCarte()"></div>
+		<div id="tmpArray""></div>
 	</body>
 </html>

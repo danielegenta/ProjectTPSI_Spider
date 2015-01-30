@@ -1,0 +1,13 @@
+.ul{
+list-style:none;
+display:inline-block;
+min-height: 50px;
+border: 3px solid black;
+width: 250px;
+margin: 0;
+padding: 0 0 0 0;
+float: left;
+}
+li{
+height:50px;
+}

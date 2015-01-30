@@ -6,14 +6,37 @@ body
 .topDecks
 {
 	border:2px solid black;
-	width:150px;
+	width:100px;
     height:200px;
 	display: inline-block;
+	margin:20px;
 }
 
 #topDeck
 {
-	height:200px;
+	height:150px;
 	width:2000px;
-	
 }
+
+#bottomDeck
+{
+	position:absolute;
+	bottom:0;
+	border:2px solid black;
+	width:100px;
+	height:200px;
+	right:150;
+}
+
+div
+{
+	height:auto;
+	width:auto;
+}
+
+.coveredDeck
+{
+	border:2px solid black;
+}
+
+#tmpArray { margin-top:800px; font-size:30px;}
