@@ -7,7 +7,15 @@ $(document).ready(function()
 	creazioneTopDecks();
 	distribuzionePrimoMazzo();
 	tmpStatoArray();
-
+	$("#btnNuovaPartita").click(function(){
+		alert("Work in progress!")
+	});
+	$("#btnHint").click(function(){
+		alert("Work in progress!")
+	});
+	$("#btnDemoVittoria").click(function(){
+		alert("Work in progress!")
+	});
 });
 
 //Creazione dinamica div che compongono il mazzo superiore
@@ -38,16 +46,23 @@ function distribuzionePrimoMazzo()
 			}
 			while (carte[num]>7)
 			carte[num]++;
-    		var classeDiv = "coveredDeck";
+			if (j==0)
+			{
+				var classeDiv = "coveredDeck0";
+			}
+			else
+    			var classeDiv = "coveredDeck";
        	 	var contenutoDiv;
             contenutoDiv = i;
         	var cella = $('<div />');
         	cella.attr("id", j+""+i);
         	//cella.attr("onclick","clickCell(" +i+ ")");
         	cella.addClass(classeDiv);
-        	cella.html(num);
+        	cella.attr("value",num);
+        	cella.html('<img src="carta_retro.jpg">');
         	//Appendo al padre i div figli
         	$("#"+i).append(cella);
+        	//$("#"j+""+i).append('<img src="carta_retro.jpg">');
     	}
     }
     //prime 4 colonne hanno una carta di più
@@ -66,19 +81,38 @@ function distribuzionePrimoMazzo()
         	cella.attr("id", "6"+i);
         	//cella.attr("onclick","clickCell(" +i+ ")");
         	cella.addClass(classeDiv);
-        	cella.html(num);
+        	cella.attr("value",num);
+        	cella.html('<img src="carta_retro.jpg">');
         	//Appendo al padre i div figli
         	$("#"+i).append(cella);
     }
 }
 
+
+
 function distribuisciCarte()
 {
-	if (distribuisci<5)
-		distribuisci++;
-	else 
-		alert("carte finite!");
+	if (distribuisci<4)
+	{
+	for (i=0; i<10; i++)
+	{
+		do
+			{
+				var num = Math.round(12*Math.random());
+			}
+			while (carte[num]>7)
+			carte[num]++;
+			tmpStatoArray();
+	}
+	distribuisci++;
+	}
+	else
+	{
+		$("#bottomDeck").html("Carte esaurite!");
+	}
 }
+
+
 
 //Funzione temporanea che mostra quante carte sono uscite
 function tmpStatoArray(){

@@ -1,3 +1,18 @@
+header, #tabellaInfo, #mainMenu
+{
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+}
+
+footer
+{
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	margin-top: 600px;
+}
+
 body 
 {
 	
@@ -5,11 +20,11 @@ body
 
 .topDecks
 {
-	border:2px solid black;
+	/*border:2px solid black;*/
 	width:100px;
     height:200px;
 	display: inline-block;
-	margin:20px;
+	margin-left:20px;
 }
 
 #topDeck
@@ -25,18 +40,26 @@ body
 	border:2px solid black;
 	width:100px;
 	height:200px;
-	right:150;
+	right:100;
 }
 
 div
 {
-	height:auto;
-	width:auto;
+	/*height:auto;
+	width:auto;*/
 }
 
 .coveredDeck
 {
-	border:2px solid black;
+	/*border:2px solid black;*/
+	height:100px;
+	margin-top:-30px;
 }
 
-#tmpArray { margin-top:800px; font-size:30px;}
+.coveredDeck0
+{
+	/*border:2px solid black;*/
+	height:100px;
+}
+
+/*#tmpArray { margin-top:800px; font-size:30px;}*/

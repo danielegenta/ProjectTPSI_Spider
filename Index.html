@@ -7,18 +7,31 @@
 		<script src="http://code.jquery.com/jquery-latest.js"></script> 
 		<script type="text/javascript" src="Script/script.js"> </script>
 	</head>
+	<header>
+		<h1>Spider</h1>
+		<h2>Gioco di carte.</h2>
+	</header>
 	<body>
 		<div id="mainMenu">
-			<input type="button" value="Nuova partita">
-			<input type="button" value="Hint">
-			<table>
+		<input type="button" value="Nuova partita" id="btnNuovaPartita">
+		<input type="button" value="Hint" id="btnHint">
+		<input type="button" value="Demo vittoria" id="btnDemoVittoria">
+		</div>
+		<div>
+			<table id="tabellaInfo">
 				<tr><td>Mosse:</td><td><div>qui mosse</div></td></tr>
 				<tr><td>Cronometro:</td><td><div>qui cronometro</div></td></tr>
 				<tr><td>Puntaggio:</td><td><div>qui punteggio</div></td></tr>
 			</table>
 		</div>
 		<div id="topDeck"></div>
-		<div id="bottomDeck" onclick="distribuisciCarte()"></div>
-		<div id="tmpArray""></div>
+		<div id="bottomDeck" onclick="distribuisciCarte()">
+			<img src="carta_retro.jpg">
+		</div>
+		<!--<div id="tmpArray""></div>-->
+		
+		<footer>
+			Gruppo: Daniele Genta, Davide Massimino, Mite Nikolov e Samuele Levrone.
+		</footer>
 	</body>
 </html>
