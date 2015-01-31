@@ -1,9 +1,11 @@
 //Variabili globali
 var carte=[0,0,0,0,0,0,0,0,0,0,0,0,0];
-distribuisci=0;
+var distribuisci=0;
+var nomeGiocatore="";
 //
 $(document).ready(function()
 {	
+	inputGiocatore();
 	creazioneTopDecks();
 	distribuzionePrimoMazzo();
 	tmpStatoArray();
@@ -17,6 +19,15 @@ $(document).ready(function()
 		alert("Work in progress!")
 	});
 });
+
+//Funzione che gestisce il nome del nomeGiocatore
+function inputGiocatore()
+{
+	nomeGiocatore=prompt("Inserire nome giocatore", nomeGiocatore);
+	if (nomeGiocatore=="" || nomeGiocatore==null || nomeGiocatore==undefined)
+		nomeGiocatore="Player 1";
+	$("#nomeGiocatore").html(nomeGiocatore);
+}
 
 //Creazione dinamica div che compongono il mazzo superiore
 function creazioneTopDecks()
