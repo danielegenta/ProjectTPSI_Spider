@@ -2,13 +2,17 @@
 var carte=[0,0,0,0,0,0,0,0,0,0,0,0,0];
 var distribuisci=0, num=0;
 var nomeGiocatore="";
-//
+
+
+//Controllo i vari eventi sui bottoni dopo aver creato i mazzi coperti superiori
 $(document).ready(function()
 {	
 	//inputGiocatore();
+	//Funzione creante i 10 div padre che ospiteranno le carte
 	creazioneTopDecks();
+	//Funzione che distribuisci le prime 54 carte coperte (scoprendo poi l'ultima colonna)
 	distribuzionePrimoMazzo();
-	tmpStatoArray();
+	//Intercetto eventi ck sui bottoni principali
 	$("#btnNuovaPartita").click(function(){
 		alert("Work in progress!")
 	});
@@ -44,6 +48,7 @@ function creazioneTopDecks()
     }
 }
 
+//Funzione che si occupa di generare un primo mazzo coperto formato da 54 carte
 function distribuzionePrimoMazzo()
 {
 	var i,j, id="";
@@ -53,13 +58,11 @@ function distribuzionePrimoMazzo()
 		{	
 			generaNumeroCasuale();
 			if (j==0)
-			{
+				//Non hanno margine
 				var classeDiv = "coveredDeck0";
-			}
 			else
+				//Margin top negativo (causa incastramento carte)
     			var classeDiv = "coveredDeck";
-       	 	var contenutoDiv;
-            contenutoDiv = i;
         	var cella = $('<div />');
         	id=j+""+i;
         	cella.attr("id", id);
@@ -68,11 +71,12 @@ function distribuzionePrimoMazzo()
         	cella.html('<img src="img/carta_retro.jpg">');
         	//Appendo al padre i div figli
         	$("#"+i).append(cella);
+        	//Se sono tra le colonne con 5 carte mostro l'ultima
         	if (j==4 && i>3)
         		mostraCarte(cella, id);
     	}
     }
-    //prime 4 colonne hanno una carta di più
+    //Ciclo che gestisce le colonne con 6 carte
     for (i=0; i<4; i++)
     {
     		generaNumeroCasuale();
@@ -89,8 +93,7 @@ function distribuzionePrimoMazzo()
     }
 }
 
-
-
+//Funzione che si occupa della distribuzione di 10 carte dal valore casuale
 function distribuisciCarte()
 {
 	if (distribuisci<=4)
@@ -98,7 +101,6 @@ function distribuisciCarte()
 		for (i=0; i<10; i++)
 		{
 			generaNumeroCasuale();
-			tmpStatoArray();
 			appendiCarta(i, num);
 		}
 		distribuisci++;
@@ -110,22 +112,7 @@ function distribuisciCarte()
 }
 
 
-
-//Funzione temporanea che mostra quante carte sono uscite
-function tmpStatoArray(){
-
-	var tmp="";
-	var somma=0,i=0;
-	for (i=0; i<13;i++)
-	{
-	
-		tmp+=carte[i];
-		somma+=carte[i];
-	}
-	$("#tmpArray").html(tmp+" "+somma);
-
-}
-
+//Funzione che permette di appendere carte al div
 function appendiCarta(i, num)
 {
 	var classeDiv = "coveredDeck";
@@ -150,12 +137,14 @@ function appendiCarta(i, num)
 	 mostraCarte(cella, id);
 }
 
+//Funzione che assegna immagine in base al valore della carta e la mostra
 function mostraCarte(cella, id) 
 {
 	valore=$("#"+id).attr("value");
 	cella.html('<img src="img/'+valore+'.jpg">');
 }
 
+//Funzione che genera un numero casuale e gestisce i valori delle carte attraverso un Array
 function generaNumeroCasuale()
 {
 	do
