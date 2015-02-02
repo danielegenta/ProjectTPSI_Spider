@@ -1,6 +1,6 @@
 //Variabili globali
 var carte=[0,0,0,0,0,0,0,0,0,0,0,0,0];
-var distribuisci=0;
+var distribuisci=0, num=0;
 var nomeGiocatore="";
 //
 $(document).ready(function()
@@ -51,12 +51,7 @@ function distribuzionePrimoMazzo()
 	{
 		for (i = 0; i < 10; i++) 
 		{	
-			do
-			{
-				var num = Math.round(12*Math.random());
-			}
-			while (carte[num]>7)
-			carte[num]++;
+			generaNumeroCasuale();
 			if (j==0)
 			{
 				var classeDiv = "coveredDeck0";
@@ -68,7 +63,6 @@ function distribuzionePrimoMazzo()
         	var cella = $('<div />');
         	id=j+""+i;
         	cella.attr("id", id);
-        	//cella.attr("onclick","clickCell(" +i+ ")");
         	cella.addClass(classeDiv);
         	cella.attr("value",num);
         	cella.html('<img src="img/carta_retro.jpg">');
@@ -81,19 +75,11 @@ function distribuzionePrimoMazzo()
     //prime 4 colonne hanno una carta di più
     for (i=0; i<4; i++)
     {
-    		do
-			{
-				var num = Math.round(12*Math.random());
-			}
-			while (carte[num]>7)
-			carte[num]++;
+    		generaNumeroCasuale();
     		var classeDiv = "coveredDeck";
-       	 	var contenutoDiv;
-            contenutoDiv = "6";
         	var cella = $('<div />');
-        	id="6"+i;
+        	id="5"+i;
         	cella.attr("id", id);
-        	//cella.attr("onclick","clickCell(" +i+ ")");
         	cella.addClass(classeDiv);
         	cella.attr("value",num);
         	cella.html('<img src="img/carta_retro.jpg">');
@@ -111,18 +97,13 @@ function distribuisciCarte()
 	{
 		for (i=0; i<10; i++)
 		{
-			do
-			{
-				var num = Math.round(12*Math.random());
-			}
-			while (carte[num]>7)
-			carte[num]++;
+			generaNumeroCasuale();
 			tmpStatoArray();
 			appendiCarta(i, num);
 		}
 		distribuisci++;
 	}
-	else
+	if (distribuisci==5)
 	{
 		$("#bottomDeck").html("Carte esaurite!");
 	}
@@ -147,26 +128,20 @@ function tmpStatoArray(){
 
 function appendiCarta(i, num)
 {
-	
 	var classeDiv = "coveredDeck";
-    var contenutoDiv;
-    contenutoDiv = "6";
     var cella = $('<div />');
 	var tmp=0;
 	var id="";
 	if (i<4)
 	{
-		tmp=distribuisci+6;
-		id=tmp+""+i;
+		id=(distribuisci+6)+""+i;
 		cella.attr("id", id);
 	}
 	else
 	{
-		tmp=distribuisci+5;
-		id=tmp+""+i;
+		id=(distribuisci+5)+""+i;
 		cella.attr("id", id);
     }
-	//cella.attr("onclick","clickCell(" +i+ ")");  
 	cella.addClass(classeDiv);
     cella.attr("value",num);
     cella.html('<img src="img/carta_retro.jpg">');
@@ -181,3 +156,13 @@ function mostraCarte(cella, id)
 	cella.html('<img src="img/'+valore+'.jpg">');
 }
 
+function generaNumeroCasuale()
+{
+	do
+	{
+		num = Math.round(12*Math.random());
+	}
+	while (carte[num]>7)
+	carte[num]++;
+	
+}
