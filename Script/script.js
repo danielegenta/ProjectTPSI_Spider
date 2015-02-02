@@ -5,7 +5,7 @@ var nomeGiocatore="";
 //
 $(document).ready(function()
 {	
-	inputGiocatore();
+	//inputGiocatore();
 	creazioneTopDecks();
 	distribuzionePrimoMazzo();
 	tmpStatoArray();
@@ -46,7 +46,7 @@ function creazioneTopDecks()
 
 function distribuzionePrimoMazzo()
 {
-	var i,j;
+	var i,j, id="";
 	for (j=0; j<5; j++)
 	{
 		for (i = 0; i < 10; i++) 
@@ -66,14 +66,16 @@ function distribuzionePrimoMazzo()
        	 	var contenutoDiv;
             contenutoDiv = i;
         	var cella = $('<div />');
-        	cella.attr("id", j+""+i);
+        	id=j+""+i;
+        	cella.attr("id", id);
         	//cella.attr("onclick","clickCell(" +i+ ")");
         	cella.addClass(classeDiv);
         	cella.attr("value",num);
-        	cella.html('<img src="carta_retro.jpg">');
+        	cella.html('<img src="img/carta_retro.jpg">');
         	//Appendo al padre i div figli
         	$("#"+i).append(cella);
-        	//$("#"j+""+i).append('<img src="carta_retro.jpg">');
+        	if (j==4 && i>3)
+        		mostraCarte(cella, id);
     	}
     }
     //prime 4 colonne hanno una carta di più
@@ -89,13 +91,15 @@ function distribuzionePrimoMazzo()
        	 	var contenutoDiv;
             contenutoDiv = "6";
         	var cella = $('<div />');
-        	cella.attr("id", "6"+i);
+        	id="6"+i;
+        	cella.attr("id", id);
         	//cella.attr("onclick","clickCell(" +i+ ")");
         	cella.addClass(classeDiv);
         	cella.attr("value",num);
-        	cella.html('<img src="carta_retro.jpg">');
+        	cella.html('<img src="img/carta_retro.jpg">');
         	//Appendo al padre i div figli
         	$("#"+i).append(cella);
+        	mostraCarte(cella,id )
     }
 }
 
@@ -103,19 +107,20 @@ function distribuzionePrimoMazzo()
 
 function distribuisciCarte()
 {
-	if (distribuisci<4)
+	if (distribuisci<=4)
 	{
-	for (i=0; i<10; i++)
-	{
-		do
+		for (i=0; i<10; i++)
+		{
+			do
 			{
 				var num = Math.round(12*Math.random());
 			}
 			while (carte[num]>7)
 			carte[num]++;
 			tmpStatoArray();
-	}
-	distribuisci++;
+			appendiCarta(i, num);
+		}
+		distribuisci++;
 	}
 	else
 	{
@@ -138,5 +143,41 @@ function tmpStatoArray(){
 	}
 	$("#tmpArray").html(tmp+" "+somma);
 
+}
+
+function appendiCarta(i, num)
+{
+	
+	var classeDiv = "coveredDeck";
+    var contenutoDiv;
+    contenutoDiv = "6";
+    var cella = $('<div />');
+	var tmp=0;
+	var id="";
+	if (i<4)
+	{
+		tmp=distribuisci+6;
+		id=tmp+""+i;
+		cella.attr("id", id);
+	}
+	else
+	{
+		tmp=distribuisci+5;
+		id=tmp+""+i;
+		cella.attr("id", id);
+    }
+	//cella.attr("onclick","clickCell(" +i+ ")");  
+	cella.addClass(classeDiv);
+    cella.attr("value",num);
+    cella.html('<img src="img/carta_retro.jpg">');
+    //Appendo al padre i div figli
+     $("#"+i).append(cella);
+	 mostraCarte(cella, id);
+}
+
+function mostraCarte(cella, id) 
+{
+	valore=$("#"+id).attr("value");
+	cella.html('<img src="img/'+valore+'.jpg">');
 }
 

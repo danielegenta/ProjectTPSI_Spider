@@ -25,6 +25,7 @@ body
     height:200px;
 	display: inline-block;
 	margin-left:20px;
+	float: left;
 }
 
 #topDeck
@@ -67,4 +68,3 @@ p
 margin-top: 600px;
 }
 
-/*#tmpArray { margin-top:800px; font-size:30px;}*/
