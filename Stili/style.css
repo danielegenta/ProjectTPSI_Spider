@@ -13,7 +13,6 @@ footer
 	margin-top: 600px;
 }
 
-body 	{}
 
 .topDecks
 {
@@ -39,12 +38,6 @@ body 	{}
 	width:75px;
 	height:100px;
 	right:100;
-}
-
-div
-{
-	/*height:auto;
-	width:auto;*/
 }
 
 .coveredDeck
@@ -80,21 +73,12 @@ div
 	color: $white;
 }
 
- .btn:hover
-{
-    background: green;
-    color: white;
-}
+ .btn:hover{background: green;color: white;}
 
-.coveredDeck0
-{
-	/*border:2px solid black;*/
-	height:100px;
-}
+.coveredDeck0{height:100px;}
 
 p
-{
-	margin-top: 600px;
+{margin-top: 600px;
 }
 
 h1 { color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 50px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center; }
@@ -110,8 +94,6 @@ h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-we
 		font-family: 'Lato', Calibri, Arial, sans-serif;
 		border: none;
                 border-radius: 3px;
-               -webkit-border-radius: 3px;
-               -moz-border-radius: 3px;
 	}
 	.flat-table th, .flat-table td {
 		box-shadow: inset 0 -1px rgba(0,0,0,0.25), 
@@ -124,15 +106,9 @@ h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-we
 		text-shadow: 0 0 1px rgba(255,255,255,0.1);
 		font-size: 1.4em;
 	}
-	.flat-table tr {
-		-webkit-transition: background 0.3s, box-shadow 0.3s;
-		-moz-transition: background 0.3s, box-shadow 0.3s;
-		transition: background 0.3s, box-shadow 0.3s;
-	}
+	.flat-table tr {transition: background 0.3s, box-shadow 0.3s;}
 
-	.flat-table tr:hover {
-		background: rgba(0,0,0,0.19);
-	}
+	.flat-table tr:hover {background: rgba(0,0,0,0.19);}
 
 footer { color: black; font-family: "Great Vibes", cursive; font-size: 20px; line-height: 160px; font-weight: normal; margin-bottom: 0px; margin-top: 40px; text-align: center; text-shadow: 0 1px 1px #fff; }
 footer:hover {color: white;}
