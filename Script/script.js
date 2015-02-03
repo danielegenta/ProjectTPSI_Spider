@@ -22,6 +22,7 @@ $(document).ready(function()
 	$("#btnDemoVittoria").click(function(){
 		alert("Work in progress!")
 	});
+	drag();
 });
 
 //Funzione che gestisce il nome del nomeGiocatore
@@ -154,4 +155,11 @@ function generaNumeroCasuale()
 	while (carte[num]>7)
 	carte[num]++;
 	
+}
+
+//rende l'ultima riga draggabless
+function drag()
+{
+	var count = $("#0").children().length;
+	alert($("#0").children().eq(count).attr("id"));
 }
