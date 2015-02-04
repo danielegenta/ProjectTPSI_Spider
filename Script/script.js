@@ -122,16 +122,9 @@ function appendiCarta(i, num)
     var cella = $('<div />');
 	var tmp=0;
 	var id="";
-	if (i<4)
-	{
-		id=(distribuisci+6)+""+i;
+	var contaFigli = $("#"+i).children().length;
+		id=contaFigli+""+i;
 		cella.attr("id", id);
-	}
-	else
-	{
-		id=(distribuisci+5)+""+i;
-		cella.attr("id", id);
-    }
 	cella.addClass(classeDiv);
     cella.attr("value",num);
     cella.html('<img src="img/carta_retro.jpg">');
@@ -159,7 +152,7 @@ function generaNumeroCasuale()
 	
 }
 
-//rende l'ultima riga draggabless
+//rende l'ultima riga draggable
 function drag()
 {
 	for(var i=0;i<10;i++)
@@ -168,6 +161,8 @@ function drag()
 	$("#"+$("#"+i).children().eq(count-1).attr("id")).draggable({revert:true,revertDuration:200});
 	}
 }
+
+
 //rende tutti i mazzi droppabili
 function drop()
 {
