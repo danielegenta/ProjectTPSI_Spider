@@ -23,6 +23,8 @@ $(document).ready(function()
 		alert("Work in progress!")
 	});
 	drag();
+	drop();
+	
 });
 
 //Funzione che gestisce il nome del nomeGiocatore
@@ -52,7 +54,7 @@ function creazioneTopDecks()
 //Funzione che si occupa di generare un primo mazzo coperto formato da 54 carte
 function distribuzionePrimoMazzo()
 {
-	var i,j, id="";
+	var i,j,id="";
 	for (j=0; j<5; j++)
 	{
 		for (i = 0; i < 10; i++) 
@@ -142,7 +144,7 @@ function appendiCarta(i, num)
 function mostraCarte(cella, id) 
 {
 	valore=$("#"+id).attr("value");
-	cella.html('<img src="img/'+valore+'.jpg">');
+	cella.html('<img name='+valore+' src="img/'+valore+'.jpg">');
 }
 
 //Funzione che genera un numero casuale e gestisce i valori delle carte attraverso un Array
@@ -160,6 +162,42 @@ function generaNumeroCasuale()
 //rende l'ultima riga draggabless
 function drag()
 {
-	var count = $("#0").children().length;
-	alert($("#0").children().eq(count).attr("id"));
+	for(var i=0;i<10;i++)
+	{
+	var count = $("#"+i).children().length;
+	$("#"+$("#"+i).children().eq(count-1).attr("id")).draggable({revert:true,revertDuration:200});
+	}
+}
+//rende tutti i mazzi droppabili
+function drop()
+{
+	for(var i=0;i<10;i++)
+	{
+	$("#"+i ).droppable({
+	 tolerance: "touch",
+     drop: function( event, ui ){ 
+		var idDrop=$(this).attr("id");//id colonna
+		var idDrag=ui.draggable.attr("id");//id carta spostata
+		var count=$("#"+idDrop).children().length;//lunghezza nuova colonna
+		var lastId=$("#"+idDrop).children().eq(count-1).attr("id");//id ultima carta nuova colonna
+		var confronta1=parseInt($("#"+lastId).find("img").attr("name"))-1;//valore ultima carta nuova colonna-1
+		var confronta2=$("#"+idDrag).find("img").attr("name");//valore carta spostata
+		if(confronta1==confronta2)
+		{
+		var nID=count+""+idDrop;//id della carta nella nuova colonna
+		var oldID = idDrag.split("");//id vecchia colonna
+		$( "#"+idDrag).draggable({revert:false});
+		$("#"+oldID).remove(":last-child");
+		$("#"+idDrop).append($("#"+idDrag));
+		$("#"+idDrag).attr("id",nID);
+		$( "#"+nID).draggable({revert:true});
+		var oldCount=$("#"+oldID[1]).children().length;//lunghezza vecchia colonna
+		var scopri=$("#"+oldID[1]).children().eq(oldCount-1).attr("id");//id ultima carta vecchia colonna
+		$("#"+scopri).attr("value");//gira la carta
+		$("#"+scopri).html('<img name='+$("#"+scopri).attr("value")+' src="img/'+$("#"+scopri).attr("value")+'.jpg">');
+		$("#"+scopri).draggable({revert:true,revertDuration:200});		
+		}		
+      }
+    });
+	}
 }
