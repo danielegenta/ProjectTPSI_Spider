@@ -123,6 +123,7 @@ function appendiCarta(i, num)
 	var tmp=0;
 	var id="";
 	var contaFigli = $("#"+i).children().length;
+	 alert($("#"+i).children().eq(length).children().eq(1).attr("value"));
 		id=contaFigli+""+i;
 		cella.attr("id", id);
 	cella.addClass(classeDiv);
@@ -236,7 +237,6 @@ function multipleDrag()
 	if (scala==1)
 			
 		{
-			
 			$("#50").append($("#"+0).children().eq(count-1));
 			$("#"+0).remove(":last-child");
 		}
