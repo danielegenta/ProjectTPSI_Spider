@@ -229,7 +229,8 @@ function scopri(oldID)
 					//Gira la carta
 					$("#"+scopri).html('<img name='+$("#"+scopri).attr("value")+' src="img/'+$("#"+scopri).attr("value")+'.jpg">');
 					$("#"+scopri).draggable({revert:true,revertDuration:200});
-					
+					//L'ultimo div di ogni riga è reso draggable
+					drag();
 					//multipleDrag();
 }
 
@@ -262,6 +263,7 @@ function checkDrag()
 				{
 					valoreScala=parseInt(contenuto);
 					valoreScala+=1;	
+					$("#"+i+colonna).draggable( 'enable' );
 				}
 				else
 				{
