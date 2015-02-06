@@ -174,7 +174,15 @@ function drag()
 	for(var i=0;i<10;i++)
 	{
 		//count = $("#"+i).children().length;
-		$('#'+i+' div:last').draggable({revert:true});//revertDuration:200});
+		if ($('#'+i+' div:last').data('draggable')) {
+        alert("yes");
+		}
+		else {
+        $('#'+i+' div:last').draggable({revert:true});//revertDuration:200});
+		}	
+		
+		
+		
 	}
 }
 
@@ -183,9 +191,7 @@ function drag()
 function drop()
 {
 	var i=0;
-		for (i=0; i<10; i++)
-    	{
-		$(".coveredDeck, .coveredDeck0, #"+i ).droppable({
+		$(".coveredDeck, .coveredDeck0").droppable({
 			tolerance: "touch",
      		drop: function( event, ui ){ 
      		//Id colonna della nuova carta
@@ -214,6 +220,34 @@ function drop()
 				}	
       		}
     	});
+    	for (i=0; i<10; i++)
+    	{
+    		$("#"+i).droppable({
+    		tolerance: "intersect",
+     		drop: function( event, ui ){ 
+     		
+     			//Id colonna della nuova carta
+				var idDrop=$(this).parent().closest(".topDecks").attr("id");//id colonna
+				alert(idDrop);
+				//Id dellla carta spostata
+				var idDrag=ui.draggable.attr("id");//id carta spostata
+				//Lunghezza della nuova colonna
+				var count=String($("#"+idDrop+" div:last").attr("id")).substring(0,1)//lunghezza nuova colonna
+				//Id dell'ultima carta della nuova colonna
+				//var lastId=$('#'+idDrop+' div:last').attr("id");    //id ultima carta nuova colonna
+				//Valori delle due carte interessate dallo spostamento
+				//var confronta1=parseInt($("#"+lastId).find("img").attr("name"))-1;//valore ultima carta nuova colonna-1
+				//var confronta2=$("#"+idDrag).find("img").attr("name");//valore carta spostata
+				var tmp=parseInt(count)+1;
+				var nID=tmp+""+idDrop;//id della carta nella nuova colonna
+				var oldID = idDrag;//id vecchia colonna OK
+				//$( "#"+idDrag).draggable({revert:false});
+				//$("#"+oldID).remove();
+				$('#'+i).append($("#"+idDrag));
+				$( "#"+nID).draggable({revert:true});
+				scopri(oldID);		
+     			}
+    		});
     	}
 }
 
@@ -272,10 +306,10 @@ function checkDrag()
 				}
 			}
 		}
-		if (scala==1)	
-		{
-			alert(colonna+" scalare");
-		}
+		//if (scala==1)	
+		//{
+			//alert(colonna+" scalare");
+		//}
 		//else
 			//alert(j+" non è sclare");
 	}
