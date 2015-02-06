@@ -174,16 +174,14 @@ function drag()
 	for(var i=0;i<10;i++)
 	{
 		//count = $("#"+i).children().length;
-		if ($('#'+i+' div:last').data('draggable')) {
-        alert("yes");
-		}
-		else {
+		//if ($('#'+i+' div:last').data('draggable')) {
+        //alert("yes");
+		//}
+		//else {
         $('#'+i+' div:last').draggable({revert:true});//revertDuration:200});
-		}	
-		
-		
-		
+		//}	
 	}
+	 $('#'+i+' div:last').draggable( 'enable' );
 }
 
 
@@ -216,6 +214,7 @@ function drop()
 					$('#'+idDrop+' div:last').append($("#"+idDrag));
 					$("#"+idDrag).attr("id",nID);
 					$( "#"+nID).draggable({revert:true});
+					checkDrag();
 					scopri(oldID);		
 				}	
       		}
@@ -225,7 +224,6 @@ function drop()
     		$("#"+i).droppable({
     		tolerance: "intersect",
      		drop: function( event, ui ){ 
-     		
      			//Id colonna della nuova carta
 				var idDrop=$(this).parent().closest(".topDecks").attr("id");//id colonna
 				alert(idDrop);
@@ -245,6 +243,7 @@ function drop()
 				//$("#"+oldID).remove();
 				$('#'+i).append($("#"+idDrag));
 				$( "#"+nID).draggable({revert:true});
+				checkDrag();
 				scopri(oldID);		
      			}
     		});
@@ -264,8 +263,7 @@ function scopri(oldID)
 					$("#"+scopri).html('<img name='+$("#"+scopri).attr("value")+' src="img/'+$("#"+scopri).attr("value")+'.jpg">');
 					$("#"+scopri).draggable({revert:true,revertDuration:200});
 					//L'ultimo div di ogni riga è reso draggable
-					drag();
-					//multipleDrag();
+					
 }
 
 //Funzione aggiornata 
@@ -288,11 +286,9 @@ function checkDrag()
 		for (i=count-1; i>=0; i--)
 		{
 			contenuto=$("#"+i+colonna).children().attr("name");
-			//alert(contenuto);
 			//La carta è scoperta
 			if (contenuto != undefined)
 			{
-				//alert("colonna:"+colonna+",contenuto: "+contenuto +", contenuto desiderato:"+valoreScala)
 				if (parseInt(contenuto)==(valoreScala))
 				{
 					valoreScala=parseInt(contenuto);
@@ -306,16 +302,7 @@ function checkDrag()
 				}
 			}
 		}
-		//if (scala==1)	
-		//{
-			//alert(colonna+" scalare");
-		//}
-		//else
-			//alert(j+" non è sclare");
 	}
+	drag();
 }
 
-function cercaUltimoFiglio()
-{
-	alert($('#0 div:last').attr("id"));
-}
