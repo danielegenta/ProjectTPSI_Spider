@@ -113,9 +113,13 @@ function distribuisciCarte()
 		for (i=0; i<10; i++)
 		{
 			generaNumeroCasuale();
+			
 			appendiCarta(i, num);
 		}
 		distribuisci++;
+		drop();
+		drag();
+		checkDrag();
 	}
 	if (distribuisci==5)
 	{
@@ -130,10 +134,11 @@ function appendiCarta(i, num)
 	var classeDiv = "coveredDeck";
     var cella = $('<div />');
 	var tmp=0;
-	var id="";
-	//var contaFigli = $("#"+i).children().length;
+	var id="", id1="";
+		//var contaFigli = $("#"+i).children().length;
 	var contaFigli=$('#'+i+' div:last').attr("id");
-		id=contaFigli+""+i;
+		id1=parseInt(contaFigli.substring(0,1))+1;
+		id=id1+""+i;
 		cella.attr("id", id);
 	cella.addClass(classeDiv);
     cella.attr("value",num);
@@ -226,42 +231,52 @@ function scopri(oldID)
 }
 
 //Funzione aggiornata 
-/*
-function multipleDrag()
+
+function checkDrag()
 {
 	var scala=1;
 	var valoreScala=0;
 	var contenuto=0;
-	var count= $('#0 div:last').attr("id").substring(0,1);
-	//prima lettura fuori ciclo della carta scoperta
-	contenuto=$('#0 div:last').attr("name");
-	valoreScala=parseInt(contenuto);
-	valoreScala+=1;
-	for (i=count-2; i>=0; i--)
+	var colonna=0, i=0;
+	for (colonna=0; colonna<10; colonna++)
 	{
-		contenuto=$("#"+i+"0").children().attr("name");
-		//La carta è scoperta
-		if (contenuto != undefined)
+		var count= $('#'+colonna+' div:last').attr("id").substring(0,1);
+		//prima lettura fuori ciclo della carta scoperta
+		contenuto=$('#'+colonna+ ' div:last').attr("value");
+		//alert(contenuto);
+		valoreScala=parseInt(contenuto);
+		valoreScala+=1;
+		scala=1;
+		for (i=count-1; i>=0; i--)
 		{
-			if (parseInt(contenuto)==(valoreScala))
+			contenuto=$("#"+i+colonna).children().attr("name");
+			//alert(contenuto);
+			//La carta è scoperta
+			if (contenuto != undefined)
 			{
-			valoreScala=parseInt(contenuto);
-			valoreScala+=1;
+				//alert("colonna:"+colonna+",contenuto: "+contenuto +", contenuto desiderato:"+valoreScala)
+				if (parseInt(contenuto)==(valoreScala))
+				{
+					valoreScala=parseInt(contenuto);
+					valoreScala+=1;	
+				}
+				else
+				{
+					scala=0;
+					$("#"+i+colonna).draggable( 'disable' );
+				}
 			}
-			else
-				scala=0;
 		}
-	}
-	if (scala==1)
-			
+		if (scala==1)	
 		{
-			$("#50").append($("#"+0).children().eq(count-1));
-			$("#"+0).remove(":last-child");
+			alert(colonna+" scalare");
 		}
+		//else
+			//alert(j+" non è sclare");
+	}
 }
 
 function cercaUltimoFiglio()
 {
 	alert($('#0 div:last').attr("id"));
 }
-*/
