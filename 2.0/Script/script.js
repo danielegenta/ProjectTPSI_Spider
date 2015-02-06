@@ -182,8 +182,10 @@ function drag()
 //rende tutti i mazzi droppabili
 function drop()
 {
-	var i;
-		$(".coveredDeck, .coveredDeck0" ).droppable({
+	var i=0;
+		for (i=0; i<10; i++)
+    	{
+		$(".coveredDeck, .coveredDeck0, #"+i ).droppable({
 			tolerance: "touch",
      		drop: function( event, ui ){ 
      		//Id colonna della nuova carta
@@ -212,6 +214,7 @@ function drop()
 				}	
       		}
     	});
+    	}
 }
 
 //Funzione che si occupa di scoprire una carta qualora quella prima di lei venga spostata ed essa sia coperta
