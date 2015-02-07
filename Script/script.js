@@ -202,6 +202,7 @@ function drop()
 				{
 					var tmp=parseInt(count)+1;
 					var nID=tmp+""+idDrop;//id della carta nella nuova colonna NO
+					console.log(nID);
 					var oldID = idDrag;//id vecchia colonna OK
 					//$( "#"+idDrag).draggable({revert:false});
 					//$("#"+oldID).remove();
@@ -235,7 +236,7 @@ function drop()
 				console.log(count +" "+ confronta1 + " "+idDrag);
 				if(confronta1=="jolly" && count==0)
 				{
-					var tmp=parseInt(count)+1;
+					var tmp=parseInt(count);
 					var nID=tmp+""+idDrop;//id della carta nella nuova colonna NO
 					var oldID = idDrag;//id vecchia colonna OK
 					//$( "#"+idDrag).draggable({revert:false});
@@ -245,7 +246,8 @@ function drop()
 					$( "#"+nID).draggable({revert:true});
 					//checkDrag();
 					//!!fare controllo su scopri (ultima carta)
-					
+					//$("#"+nID).removeClass("coveredDeck0");
+					//$("#"+nID).addClass("coveredDeck");
 					scopri(oldID);
 					aumentaMosse();		
 				}
@@ -303,6 +305,7 @@ function checkDrag()
 			}
 		}
 	}
+	checkID();
 	drag();
 }
 
@@ -355,4 +358,30 @@ function animazioneVittoria()
 function provaDrop()
 {
 	$("#11").droppable();
+}
+
+function checkID ()
+{
+	var supporto=0;
+	var contenuto=0;
+	var i, j;
+	for (i=0; i<10;i++)
+	{
+		var count= ($('#'+i).find('div').length);
+		var id=i;
+		for (j=0; j<count; j++)
+		{
+			//j=0;
+			//$("#"+j+i).children()
+			contenuto=$("#"+id).children('div').attr("id");
+			id=contenuto;
+			supporto=(j+""+i);
+			//console.log(id);
+			if (contenuto!=supporto)
+			{
+				console.log("id changed "+supporto+" "+contenuto);
+				$("#"+contenuto).attr( 'id', supporto );
+			}
+		}
+	}
 }
