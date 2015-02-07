@@ -14,5 +14,7 @@ Major updates:
 0.2 aggiunta carte coperte e miglioramento struttura HTML
 0.3 finita aggiunta carte coperte, ultima fila scoperta e distribuzione carte da mazzo inferiore
 0.4 spostamento carte singolo e scoperta di eventuali carte coperte
+0.5 cambio di logica, div annidati 
+0.6 fine spostamento multiplo e singolo, revisione del progetto (debug e documentazione)
 
 //

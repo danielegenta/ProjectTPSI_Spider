@@ -1,13 +1,13 @@
 //Variabili globali
 var carte=[0,0,0,0,0,0,0,0,0,0,0,0,0];
-var distribuisci=0, num=0, ultimoFiglio=0;
+var distribuisci=0, num=0, ultimoFiglio=0, mazziCompletati=0;
 var nomeGiocatore="";
 
 
 //Controllo i vari eventi sui bottoni dopo aver creato i mazzi coperti superiori
 $(document).ready(function()
 {	
-	//inputGiocatore();
+	inputGiocatore();
 	//Funzione creante i 10 div padre che ospiteranno le carte
 	creazioneTopDecks();
 	//Funzione che distribuisci le prime 54 carte coperte (scoprendo poi l'ultima colonna)
@@ -24,8 +24,6 @@ $(document).ready(function()
 	});
 	drag();
 	drop();
-	//cercaUltimoFiglio();
-	//multipleDrag();
 });
 
 //Funzione che gestisce il nome del nomeGiocatore
@@ -46,6 +44,7 @@ function creazioneTopDecks()
     	var classeDiv = "topDecks";
         var cella = $('<div />');
         cella.attr("id",i);
+        cella.attr("value","jolly")
         cella.addClass(classeDiv);
         //Appendo al padre i div figli
         $("#topDeck").append(cella);
@@ -113,10 +112,10 @@ function distribuisciCarte()
 		for (i=0; i<10; i++)
 		{
 			generaNumeroCasuale();
-			
 			appendiCarta(i, num);
 		}
 		distribuisci++;
+		azzeraDrag();
 		drop();
 		drag();
 		checkDrag();
@@ -173,15 +172,10 @@ function drag()
 	var count;
 	for(var i=0;i<10;i++)
 	{
-		//count = $("#"+i).children().length;
-		//if ($('#'+i+' div:last').data('draggable')) {
-        //alert("yes");
-		//}
-		//else {
         $('#'+i+' div:last').draggable({revert:true});//revertDuration:200});
-		//}	
+        $('#'+i+' div:last').draggable( 'enable' );
 	}
-	 $('#'+i+' div:last').draggable( 'enable' );
+	 
 }
 
 
@@ -189,6 +183,7 @@ function drag()
 function drop()
 {
 	var i=0;
+	provaDrop();
 		$(".coveredDeck, .coveredDeck0").droppable({
 			tolerance: "touch",
      		drop: function( event, ui ){ 
@@ -198,7 +193,6 @@ function drop()
 				var idDrag=ui.draggable.attr("id");//id carta spostata
 			//Lunghezza della nuova colonna
 				var count=String($("#"+idDrop+" div:last").attr("id")).substring(0,1)//lunghezza nuova colonna
-
 			//Id dell'ultima carta della nuova colonna
 				var lastId=$('#'+idDrop+' div:last').attr("id");    //id ultima carta nuova colonna
 			//Valori delle due carte interessate dallo spostamento
@@ -214,55 +208,63 @@ function drop()
 					$('#'+idDrop+' div:last').append($("#"+idDrag));
 					$("#"+idDrag).attr("id",nID);
 					$( "#"+nID).draggable({revert:true});
-					checkDrag();
-					scopri(oldID);		
+					//checkDrag();
+					//!!fare controllo su scopri (ultima carta)
+					scopri(oldID);
+					aumentaMosse();		
 				}	
       		}
     	});
     	for (i=0; i<10; i++)
     	{
     		$("#"+i).droppable({
-    		tolerance: "intersect",
+    		tolerance: "touch",
      		drop: function( event, ui ){ 
-     			//Id colonna della nuova carta
-				var idDrop=$(this).parent().closest(".topDecks").attr("id");//id colonna
-				alert(idDrop);
-				//Id dellla carta spostata
+     		//Id colonna della nuova carta
+				var idDrop=$(this).attr("id"); //parent().closest(".topDecks").attr("id");//id colonna
+				//alert(idDrop);
+			//Id dellla carta spostata
 				var idDrag=ui.draggable.attr("id");//id carta spostata
-				//Lunghezza della nuova colonna
-				var count=String($("#"+idDrop+" div:last").attr("id")).substring(0,1)//lunghezza nuova colonna
-				//Id dell'ultima carta della nuova colonna
-				//var lastId=$('#'+idDrop+' div:last').attr("id");    //id ultima carta nuova colonna
-				//Valori delle due carte interessate dallo spostamento
-				//var confronta1=parseInt($("#"+lastId).find("img").attr("name"))-1;//valore ultima carta nuova colonna-1
+			//Lunghezza della nuova colonna
+				var count=($('#'+idDrop).find('div').length)//lunghezza nuova colonna
+			//Id dell'ultima carta della nuova colonna
+				var lastId=$('#'+idDrop+' div:last').attr("id");    //id ultima carta nuova colonna
+			//Valori delle due carte interessate dallo spostamento
+				var confronta1=$("#"+idDrop).attr("value");//valore ultima carta nuova colonna-1
 				//var confronta2=$("#"+idDrag).find("img").attr("name");//valore carta spostata
-				var tmp=parseInt(count)+1;
-				var nID=tmp+""+idDrop;//id della carta nella nuova colonna
-				var oldID = idDrag;//id vecchia colonna OK
-				//$( "#"+idDrag).draggable({revert:false});
-				//$("#"+oldID).remove();
-				$('#'+i).append($("#"+idDrag));
-				$( "#"+nID).draggable({revert:true});
-				checkDrag();
-				scopri(oldID);		
-     			}
-    		});
-    	}
+				console.log(count +" "+ confronta1 + " "+idDrag);
+				if(confronta1=="jolly" && count==0)
+				{
+					var tmp=parseInt(count)+1;
+					var nID=tmp+""+idDrop;//id della carta nella nuova colonna NO
+					var oldID = idDrag;//id vecchia colonna OK
+					//$( "#"+idDrag).draggable({revert:false});
+					//$("#"+oldID).remove();
+					$('#'+idDrop).append($("#"+idDrag));
+					$("#"+idDrag).attr("id",nID);
+					$( "#"+nID).draggable({revert:true});
+					//checkDrag();
+					//!!fare controllo su scopri (ultima carta)
+					
+					scopri(oldID);
+					aumentaMosse();		
+				}
+				 }
+				 });
+			}
 }
 
 //Funzione che si occupa di scoprire una carta qualora quella prima di lei venga spostata ed essa sia coperta
 function scopri(oldID) 
 {
-					//var oldCount=oldID.substring(0,1);//lunghezza vecchia colonna
-					//var oldCount2=oldID.substring(1,2);//lunghezza vecchia colonna
-					//oldCount2=parseInt(oldCount)-1;
 					var riga=oldID.substring(1,2);
 					var scopri=$('#'+riga+' div:last').attr("id");//id ultima carta vecchia colonna
 					//$("#"+scopri).attr("value");
 					//Gira la carta
 					$("#"+scopri).html('<img name='+$("#"+scopri).attr("value")+' src="img/'+$("#"+scopri).attr("value")+'.jpg">');
 					$("#"+scopri).draggable({revert:true,revertDuration:200});
-					//L'ultimo div di ogni riga è reso draggable
+					$("#"+scopri).draggable('enable');
+					checkDrag();
 					
 }
 
@@ -270,34 +272,32 @@ function scopri(oldID)
 
 function checkDrag()
 {
-	var scala=1;
+	var scala=true;
 	var valoreScala=0;
 	var contenuto=0;
 	var colonna=0, i=0;
 	for (colonna=0; colonna<10; colonna++)
 	{
-		var count= $('#'+colonna+' div:last').attr("id").substring(0,1);
+		scala=true;
+		var count= ($('#'+colonna).find('div').length)-1;
 		//prima lettura fuori ciclo della carta scoperta
 		contenuto=$('#'+colonna+ ' div:last').attr("value");
-		//alert(contenuto);
-		valoreScala=parseInt(contenuto);
-		valoreScala+=1;
-		scala=1;
+		valoreScala=parseInt(contenuto)+1;
+		
 		for (i=count-1; i>=0; i--)
 		{
 			contenuto=$("#"+i+colonna).children().attr("name");
 			//La carta è scoperta
-			if (contenuto != undefined)
+			if (contenuto != undefined && scala==true)
 			{
 				if (parseInt(contenuto)==(valoreScala))
 				{
-					valoreScala=parseInt(contenuto);
-					valoreScala+=1;	
 					$("#"+i+colonna).draggable( 'enable' );
+					valoreScala+=1;	
 				}
 				else
 				{
-					scala=0;
+					scala=false;
 					$("#"+i+colonna).draggable( 'disable' );
 				}
 			}
@@ -306,3 +306,53 @@ function checkDrag()
 	drag();
 }
 
+function azzeraDrag()
+{
+	var i,j;
+	var contenuto;
+	for (i=0; i<10;i++)
+	{
+		var count= ($('#'+i).find('div').length)-1;
+		for (j=0; j<count; j++)
+		{
+			contenuto=$("#"+j+i).children().attr("name");
+			if (contenuto!=undefined)
+				//alert(contenuto)
+				$("#"+j+i).draggable( 'disable' );
+		}
+	}
+}
+
+function controlloVittoria()
+{
+	//controllo mazzo completato
+	//se completato aumento mazzi completati e progressbar
+	//controllo vittoria
+	if (mazziCompletati==8)
+	{
+		alert("hai vinto!")
+	}
+}
+
+function aumentaMosse()
+{
+	var nMosse=0;
+	nMosse=$("#numeroMosse").html();
+	nMosse++;
+	console.log(nMosse);
+	nMosse=$("#numeroMosse").html(nMosse);
+}
+
+function nuovaPartita()
+{}
+
+function hint()
+{}
+
+function animazioneVittoria()
+{}
+
+function provaDrop()
+{
+	$("#11").droppable();
+}
