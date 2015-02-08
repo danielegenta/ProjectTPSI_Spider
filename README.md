@@ -16,5 +16,8 @@ Major updates:
 0.4 spostamento carte singolo e scoperta di eventuali carte coperte
 0.5 cambio di logica, div annidati 
 0.6 fine spostamento multiplo e singolo, revisione del progetto (debug e documentazione)
+0.7 aggiunte nuove funzionalità: cronometro, conteggio mosse
+
+Ogni major update contiene miglioramenti e correzioni di bug.
 
 //
