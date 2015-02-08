@@ -1,3 +1,6 @@
+/*
+	Intestazione, menù principale e tabella informazioni
+*/
 header, #tabellaInfo, #mainMenu
 {
 	margin-left:auto;
@@ -5,15 +8,10 @@ header, #tabellaInfo, #mainMenu
 	text-align:center;
 }
 
-footer
-{
-	margin-left:auto;
-	margin-right:auto;
-	text-align:center;
-	margin-top: 600px;
-}
 
-
+/*
+	Mazzi superiori
+*/
 .topDecks
 {
 	border:2px solid black;
@@ -24,12 +22,18 @@ footer
 	float: left;
 }
 
+/*
+	Contenitore mazzi superiori
+*/
 #topDeck
 {
 	height:150px;
 	width:2000px;
 }
 
+/*
+	Mazzo inferiore
+*/
 #bottomDeck
 {
 	position:absolute;
@@ -40,16 +44,34 @@ footer
 	right:100;
 }
 
+/*
+	Carte coperte (colonna>0)
+*/
 .coveredDeck
 {
-	/*border:2px solid black;*/
 	height:100px;
 	margin-top:-30px;
 }
 
-.main { background: #2ecc71; }
+/*
+	Carte coperte della prima colonna
+*/
+.coveredDeck0
+{
+	height:100px;
+}
 
+/*
+	Classe applicata al body
+*/
+.main
+{
+	 background: #2ecc71; 
+}
 
+/*
+	Classe applicata a tutti i bottoni
+*/
 .btn 
 {
   border: 0 none;
@@ -74,46 +96,54 @@ footer
 	color: $white;
 }
 
- .btn:hover{background: green;color: white;}
-
-.coveredDeck0
-{
-height:100px;
-}
+/*
+	Mouse sopra bottone
+*/
+ .btn:hover
+ {
+ 	background: green;color: white;
+ }
 
 p
 {
 	margin-top: 600px;
 }
 
+/*
+	Titolo e sottotiolo
+*/
 h1 { color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 50px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center; }
-
 h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-weight: 300; line-height: 32px; margin: 0 0 72px; text-align: center; }
 
 
+/*
+	Tabella informazioni su partita
+*/
+.flat-table
+{
+	margin-bottom: 20px;
+	border-collapse:collapse;
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+	border: none;
+    border-radius: 3px;
+}
+.flat-table th, .flat-table td 
+{
+	box-shadow: inset 0 -1px rgba(0,0,0,0.25), 
+	inset 0 1px rgba(0,0,0,0.25);
+}
+.flat-table td 
+{
+	color: #f7f7f7;
+	padding: 0.7em 1em 0.7em 1.15em;
+	text-shadow: 0 0 1px rgba(255,255,255,0.1);
+	font-size: 1.4em;
+}
+.flat-table tr {transition: background 0.3s, box-shadow 0.3s;}
+.flat-table tr:hover {background: rgba(0,0,0,0.19);}
 
-
-.flat-table {
-		margin-bottom: 20px;
-		border-collapse:collapse;
-		font-family: 'Lato', Calibri, Arial, sans-serif;
-		border: none;
-                border-radius: 3px;
-	}
-	.flat-table th, .flat-table td {
-		box-shadow: inset 0 -1px rgba(0,0,0,0.25), 
-			inset 0 1px rgba(0,0,0,0.25);
-	}
-	
-	.flat-table td {
-		color: #f7f7f7;
-		padding: 0.7em 1em 0.7em 1.15em;
-		text-shadow: 0 0 1px rgba(255,255,255,0.1);
-		font-size: 1.4em;
-	}
-	.flat-table tr {transition: background 0.3s, box-shadow 0.3s;}
-
-	.flat-table tr:hover {background: rgba(0,0,0,0.19);}
-
-footer { color: black; font-family: "Great Vibes", cursive; font-size: 20px; line-height: 160px; font-weight: normal; margin-bottom: 0px; margin-top: 40px; text-align: center; text-shadow: 0 1px 1px #fff; }
+/*
+	Piè di pagina
+*/
+footer {color: black; font-family: "Great Vibes", cursive; font-size: 20px; line-height: 160px; font-weight: normal; margin-bottom: 0px; margin-top: 600px; text-align: center; text-shadow: 0 1px 1px #fff; }
 footer:hover {color: white;}

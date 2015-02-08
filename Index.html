@@ -3,25 +3,30 @@
 		<title>
 			Progetto TPSI:Spider
 		</title>
+		<!--Collegamento a risorse Javascript e CSS-->
 		<link href="Stili/style.css" rel="stylesheet" type="text/css">
 		<script src="http://code.jquery.com/jquery-latest.js"></script> 
 		<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-		
-		<!--OFFLINE jquery - <script type="text/javascript" src="Script/offline/jquery.js"> </script>
-		<script type="text/javascript" src="Script/offline/jquery-ui/jquery-ui.min.js"> </script>-->
+		<!--RISORSE OFFLINE jquery
+		<script type="text/javascript" src="Script/offline/jquery.js"> </script>
+		<script type="text/javascript" src="Script/offline/jquery-ui/jquery-ui.min.js"> </script>
+		-->
 		<script type="text/javascript" src="Script/script.js"> </script>	
 	</head>
+	<!--Titolo e sottotiolo-->
 	<header>
 		<h1>Spider</h1>
 		<h2>Gioco di carte.</h2>
 	</header>
 	<body class="main">
+	<!--Top-menù: principali bottoni di interazione-->
 		<div id="mainMenu">
-		<input type="button" value="Nuova partita" id="btnNuovaPartita" class="btn">
-		<input type="button" value="Hint" id="btnHint" class="btn">
-		<input type="button" value="Demo vittoria" id="btnDemoVittoria" class="btn">
-		<input type="button" value="Pausa" id="btnPausa" class="btn">
+			<input type="button" value="Nuova partita" id="btnNuovaPartita" class="btn">
+			<input type="button" value="Hint" id="btnHint" class="btn">
+			<input type="button" value="Demo vittoria" id="btnDemoVittoria" class="btn">
+			<input type="button" value="Pausa" id="btnPausa" class="btn">
 		</div>
+	<!--Tabella contenente informazioni e statistiche partita-->
 		<div>
 			<table id="tabellaInfo" class="flat-table">
 				<tr>
@@ -38,15 +43,14 @@
 			</table>
 		</div>
 		<br><br>
-		<div id="topDeck"></div>
+		<!--Contenitore mazzo superiore-->
+		<div id="topDeck">
+		</div>
+		<!--Contenitore mazzo inferiore-->
 		<div id="bottomDeck" onclick="distribuisciCarte()">
 			<img src="img/carta_retro.jpg">
 		</div>
-		<!--<div id="tmpArray""></div>-->
-		<section>   
-		<!--Barra di progresso che aumenta (12,5%) ad ogni scala completata-->
- 		 <p> </p>   
-		</section>
+		<!--Piè di pagina-->
 		<footer>
 			Gruppo: Daniele Genta, Davide Massimino, Mite Nikolov e Samuele Levrone.
 		</footer>
