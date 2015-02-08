@@ -202,7 +202,6 @@ function drop()
 				{
 					var tmp=parseInt(count)+1;
 					var nID=tmp+""+idDrop;//id della carta nella nuova colonna NO
-					console.log(nID);
 					var oldID = idDrag;//id vecchia colonna OK
 					//$( "#"+idDrag).draggable({revert:false});
 					//$("#"+oldID).remove();
@@ -211,6 +210,13 @@ function drop()
 					$( "#"+nID).draggable({revert:true});
 					//checkDrag();
 					//!!fare controllo su scopri (ultima carta)
+					var sp=oldID.substring(0,1);
+					console.log(sp);
+					if (sp=="0")
+					{
+						$("#"+nID).removeClass("coveredDeck0").addClass("coveredDeck");
+						console.log("cambio classe "+nID);
+					}
 					scopri(oldID);
 					aumentaMosse();		
 				}	
@@ -233,7 +239,6 @@ function drop()
 			//Valori delle due carte interessate dallo spostamento
 				var confronta1=$("#"+idDrop).attr("value");//valore ultima carta nuova colonna-1
 				//var confronta2=$("#"+idDrag).find("img").attr("name");//valore carta spostata
-				console.log(count +" "+ confronta1 + " "+idDrag);
 				if(confronta1=="jolly" && count==0)
 				{
 					var tmp=parseInt(count);
@@ -246,8 +251,8 @@ function drop()
 					$( "#"+nID).draggable({revert:true});
 					//checkDrag();
 					//!!fare controllo su scopri (ultima carta)
-					//$("#"+nID).removeClass("coveredDeck0");
-					//$("#"+nID).addClass("coveredDeck");
+					console.log(nID);
+					$("#"+nID).removeClass("coveredDeck").addClass("coveredDeck0");
 					scopri(oldID);
 					aumentaMosse();		
 				}
@@ -259,15 +264,13 @@ function drop()
 //Funzione che si occupa di scoprire una carta qualora quella prima di lei venga spostata ed essa sia coperta
 function scopri(oldID) 
 {
-					var riga=oldID.substring(1,2);
-					var scopri=$('#'+riga+' div:last').attr("id");//id ultima carta vecchia colonna
-					//$("#"+scopri).attr("value");
-					//Gira la carta
-					$("#"+scopri).html('<img name='+$("#"+scopri).attr("value")+' src="img/'+$("#"+scopri).attr("value")+'.jpg">');
-					$("#"+scopri).draggable({revert:true,revertDuration:200});
-					$("#"+scopri).draggable('enable');
-					checkDrag();
-					
+	var riga=oldID.substring(1,2);
+	var scopri=$('#'+riga+' div:last').attr("id");//id ultima carta vecchia colonna
+	//Gira la carta
+	$("#"+scopri).html('<img name='+$("#"+scopri).attr("value")+' src="img/'+$("#"+scopri).attr("value")+'.jpg">');
+	$("#"+scopri).draggable({revert:true,revertDuration:200});
+	$("#"+scopri).draggable('enable');
+	checkDrag();				
 }
 
 //Funzione aggiornata 
@@ -342,7 +345,6 @@ function aumentaMosse()
 	var nMosse=0;
 	nMosse=$("#numeroMosse").html();
 	nMosse++;
-	console.log(nMosse);
 	nMosse=$("#numeroMosse").html(nMosse);
 }
 
@@ -376,10 +378,8 @@ function checkID ()
 			contenuto=$("#"+id).children('div').attr("id");
 			id=contenuto;
 			supporto=(j+""+i);
-			//console.log(id);
 			if (contenuto!=supporto)
-			{
-				console.log("id changed "+supporto+" "+contenuto);
+			{   
 				$("#"+contenuto).attr( 'id', supporto );
 			}
 		}
