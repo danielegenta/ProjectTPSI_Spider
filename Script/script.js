@@ -103,6 +103,7 @@ function distribuzionePrimoMazzo()
         	//Se sono tra le colonne con 5 carte mostro l'ultima
         	if (j==4 && i>3)
         		mostraCarte(cella, id);
+        	tmpArray();
     	}
     }
     //Ciclo che gestisce le colonne con 6 carte
@@ -145,7 +146,11 @@ function distribuisciCarte()
 	}
 	//Se il mazzo è esaurito
 	if (distribuisci==5)
+	{
 		$("#bottomDeck").html("Carte esaurite!");
+		tmpMostraTutte();
+	}
+	tmpArray();
 }
 
 
@@ -433,6 +438,32 @@ function controlloVittoria()
 	{
 		alert("hai vinto!")
 	}
+}
+
+function tmpArray()
+{
+	$("#tmpArray").html("");
+	var supporto="";
+	for (i=0; i<13; i++)
+	{
+		 supporto+=carte[i];
+	}
+	$("#tmpArray").html(supporto);
+}
+
+function tmpMostraTutte()
+{
+	var i, id, count, valore, cella;
+	for (i=0; i<10;i++)
+	{
+		count= $('#'+i).find('div').length;
+		valore="";
+		for (j=0; j<count; j++)
+		{
+			valore+=" "+String($("#"+j+i).attr("value"));
+		}
+		console.log(valore);
+}
 }
 
 
