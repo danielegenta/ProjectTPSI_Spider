@@ -1,0 +1,20 @@
+1)Spider Solitaire si gioca in tutto con 104 carte.
+All’inizio del gioco vi sono 10 mazzetti (54 carte in tutto) sul tavolo di gioco.
+La prima carta di ogni mazzo e scoperta.
+Con le 50 carte restanti si formano 5 mazzi con 10 carte nascoste ciascuno.
+Scopo del gioco è di raggruppare tutte le carte in sequenze.
+Con sequenza si intende una scala di carte di valore descrescente dello stesso seme, es. 7 di picche, 6 di picche, 5 di picche e 4 di picche.
+Quando termini una sequenza di 13 carte (dal re all’asso), questa viene rimossa dal tavolo di gioco, facendoti incassare dei punti.
+
+2)Nel solitario Spider si gioca con due mazzi da 52 carte.
+Vengono disposte 54 carte coperte su 10 colonne per formare il tavolo (le 4 colonne di sinistra sono composte da 6 carte, e le 6 di destra hanno 5 carte) e si formano cinque mazzi da 10 carte con quelle rimaste, poi si scopre la prima faccia di ogni colonna.
+Lo scopo del gioco è eliminare tutte le carte sul tavolo (e nel mazzo), formando delle scale complete dal Kappa all'Asso in ordine decrescente.
+Quando su una colonna di carte riuscirete a formare una scala completa, questa verrà automaticamente eliminata dal quadro.
+Spostate tutte le carte che potete e, quando non avrete più mosse o deciderete di non farne altre, cliccate su una della carte del mazzo e una fila di nuove carte verrà aggiunta a quelle scoperte sul tavolo.
+
+3)Scopo del gioco è di formare scale complete (dal Re all'Asso) dello stesso seme.
+In questo modo le carte vengono tolte dal gioco.
+Si raggiunge la vittoria quando non ci sono carte in gioco.
+Per arrivare all'obiettivo si possono spostare carte singole o gruppi di carte dalla cima di una colonna ad una delle altre colonne, ma solo se il gruppo è composto da una scala di carte dello stesso seme.
+È possibile attaccare la carta scelta o la scala ad una carta anche di seme differente ma obbligatoriamente del valore consecutivo nella scala (es. una coppia 5-4 di picche deve essere attaccata ad un 6 di qualsiasi seme) oppure ad una colonna vuota.
+Quando non si può fare nessuno spostamento o quando si desidera è possibile aggiungere una carta ad ogni colonna prendendola dai cinque mazzi messi da parte precedentemente (questa mossa è detta spider).

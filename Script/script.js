@@ -4,7 +4,9 @@
 var carte=[0,0,0,0,0,0,0,0,0,0,0,0,0];
 var distribuisci=0, num=0, ultimoFiglio=0, mazziCompletati=0;
 var nomeGiocatore="";
-
+var pausa=false, scorriTempo=false, newPartita=false,vincita=false; //cronometro;
+var velocitaCronometro=1000;
+var decineMinuti,unitaMinuti,decineSecondi,unitaSecondi,e,f,separatoreMinSec;
 
 /*
 *	Chiedo il nome del giocatore, creo dinamicamente i 10 mazzi superiori, distribuisco il primo mazzo e controllo eventi sui bottoni
@@ -13,6 +15,7 @@ $(document).ready(function()
 {	
 	//Funzione che richiede tramite input-box in nome del giocatore
 	inputGiocatore();
+	switchCronometro();
 	//Funzione creante i 10 div padre che ospiteranno le carte
 	creazioneTopDecks();
 	//Funzione che distribuisci le prime 54 carte coperte (scoprendo poi l'ultima colonna)
@@ -464,6 +467,75 @@ function tmpMostraTutte()
 		}
 		console.log(valore);
 }
+}
+
+
+//Funzioni legate a cronometro
+//Interruttore aziona/ferma cronometro
+function switchCronometro()
+{   	
+	var cronometro;
+    if(scorriTempo == false) 
+    {            
+        if (pausa==true)
+        	avviaCronometro();
+        else
+        {
+        	stringaTempo = "00:00";
+            cronometro = setInterval(function() 
+            {
+                avviaCronometro();
+            },velocitaCronometro);
+        }
+    }
+    else if (scorriTempo==true)
+    {
+        scorriTempo = false;
+        if (newPartita==true)
+        {
+        	pausa=false;
+        	clearInterval(cronometro);
+        	switchCronometro();
+        }
+        }        
+}
+
+//Misura il tempo e lo stampa
+function avviaCronometro(){
+
+	if (pausa==false  && vincita==false)
+	{
+	scorriTempo = true;
+    decineMinuti = parseInt(stringaTempo.charAt(0));
+    unitaMinuti = parseInt(stringaTempo.charAt(1));
+    separatoreMinSec = ":";
+    decineSecondi = parseInt(stringaTempo.charAt(3));
+    unitaSecondi = parseInt(stringaTempo.charAt(4));
+                if(unitaSecondi >= 9) {
+                    unitaSecondi = 0;
+                    if(decineSecondi >= 5) {
+                        decineSecondi = 0;
+                        if(unitaMinuti >= 9) {
+                            unitaMinuti = 0;
+                            if(decineMinuti >= 9)
+                                clearInterval(cronometro);
+                            else
+                                decineMinuti++;
+                        }
+                        else
+                            unitaMinuti++;
+                    }
+                    else
+                        decineSecondi++;
+                }
+                else
+                    unitaSecondi++;
+        //Stampo il tempo
+        stringaTempo = String(decineMinuti) + String(unitaMinuti) + String(separatoreMinSec) + String(decineSecondi) + String(unitaSecondi);
+        for ( i = 0; i < stringaTempo.length; i++ ) {
+            $("#s" + i).html(stringaTempo.charAt(i))
+        }
+    }
 }
 
 
