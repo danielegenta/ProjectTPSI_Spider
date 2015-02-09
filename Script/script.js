@@ -480,15 +480,20 @@ function tmpMostraTutte()
 }
 
 
-//Funzioni legate a cronometro
-//Interruttore aziona/ferma cronometro
+//------Funzioni legate a cronometro-------
+
+/*
+*	Funzione che gestisce il cronometro
+*/
 function switchCronometro()
 {   	
 	var cronometro;
     if(scorriTempo == false) 
     {            
+    	//Riavvio del cronometro dopo la pausa
         if (pausa==true)
         	avviaCronometro();
+        //Gestione nuova partita
         else
         {
         	stringaTempo = "00:00";
@@ -498,6 +503,7 @@ function switchCronometro()
             },velocitaCronometro);
         }
     }
+    //Gestione evento pausa
     else if (scorriTempo==true)
     {
         scorriTempo = false;
@@ -510,9 +516,11 @@ function switchCronometro()
         }        
 }
 
-//Misura il tempo e lo stampa
+/*
+*	Funzione che misura il tempo e aggiorna il div interessato
+*/
 function avviaCronometro(){
-
+	//Misuro il tempo
 	if (pausa==false  && vincita==false)
 	{
 	scorriTempo = true;
