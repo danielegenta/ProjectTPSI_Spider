@@ -30,6 +30,16 @@ $(document).ready(function()
 	$("#btnDemoVittoria").click(function(){
 		alert("Work in progress!")
 	});
+	$("#btnPausa").click(function()
+	{
+	switchCronometro();
+		if (pausa==true)
+			$("#btnPausa").attr("value","Pausa");
+		else 
+			$("#btnPausa").attr("value","Riprendi");
+		pausa=!pausa;
+		
+	});
 	//Funzione che rende l'ultima carta di ogni colonna draggabile
 	drag();
 	//Funzione che rende tutte le carte droppabili
