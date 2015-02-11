@@ -160,7 +160,6 @@ function distribuisciCarte()
 	if (distribuisci==5)
 	{
 		$("#bottomDeck").html("Carte esaurite!");
-		tmpMostraTutte();
 	}
 	tmpArray();
 }
@@ -173,21 +172,34 @@ function appendiCarta(i, num)
 {
 	var classeDiv = "coveredDeck";
     var cella = $('<div />');
-	var id="", id1="";
+	var id, id1, contaFigli;
 	//Individuo l'ultimo id (solo la riga)
 	var contaFigli=$('#'+i+' div:last').attr("id");
-	if (contaFigli.length==2)
-		id1=parseInt(contaFigli.substring(0,1))+1;
-	else if (contaFigli.length==3)
-		id1=parseInt(contaFigli.substring(0,2))+1;
-	//Costruisco il nuovo id
-	id=id1+""+i;
-	//Assegno proprietà al div e lo appendo al padre
-	cella.attr("id", id);
-	cella.addClass(classeDiv);
-    cella.attr("value",num);
-    cella.html('<img src="img/carta_retro.jpg">');
-    $('#'+i+' div:last').append(cella);
+	if (contaFigli!=undefined)
+	{
+		if (contaFigli.length==2)
+			id1=parseInt(contaFigli.substring(0,1))+1;
+		else if (contaFigli.length==3)
+			id1=parseInt(contaFigli.substring(0,2))+1;
+		//Costruisco il nuovo id
+		id=id1+""+i;
+		//Assegno proprietà al div e lo appendo al padre
+		cella.attr("id", id);
+		cella.addClass(classeDiv);
+    	cella.attr("value",num);
+    	cella.html('<img src="img/carta_retro.jpg">');
+    	$('#'+i+' div:last').append(cella);
+	}
+	else
+	{
+		classeDiv = "coveredDeck0";
+		id=0+""+i;
+		cella.attr("id", id);
+		cella.addClass(classeDiv);
+    	cella.attr("value",num);
+    	cella.html('<img src="img/carta_retro.jpg">');
+   		$('#'+i).append(cella);
+	}
 	mostraCarte(cella, id);
 }
 
@@ -639,28 +651,25 @@ function aiuti()
 function evidenziaCarte(riga, riga2, i, colonna)
 {
 	//Le carte rimangono evidenziate (bordo giallo) per un secondo e poi tornano normali
+	$('#'+riga+i).addClass("cardHighlighted",1000);
 	if (riga>0)
 		$('#'+riga+i).removeClass("coveredDeck");
 	else
 		$('#'+riga+i).removeClass("coveredDeck0");
-	$('#'+riga+i).addClass("cardHighlighted");
+	$('#'+riga2+colonna).addClass("cardHighlighted",1000);
 	if (riga2>0)
 		$('#'+riga2+colonna).removeClass("coveredDeck");
 	else
 		$('#'+riga2+colonna).removeClass("coveredDeck0");
-	$('#'+riga2+colonna).addClass("cardHighlighted");
-	var timerAiuto = setInterval(function() 
-    {
+
     	if (riga>0)
-			$('#'+riga+i).addClass("coveredDeck", 500);
+			$('#'+riga+i).addClass("coveredDeck");
 		else
 			$('#'+riga+i).addClass("coveredDeck0");
-		$('#'+riga+i).removeClass("cardHighlighted");
+		$('#'+riga+i).removeClass("cardHighlighted", 1000);
 		if (riga2>0)
-			$('#'+riga2+colonna).addClass("coveredDeck", 500);
+			$('#'+riga2+colonna).addClass("coveredDeck");
 		else
 			$('#'+riga2+colonna).addClass("coveredDeck0");
-		$('#'+riga2+colonna).removeClass("cardHighlighted");
-    },1000);
-	
+		$('#'+riga2+colonna).removeClass("cardHighlighted", 1000);
 }
