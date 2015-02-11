@@ -6,7 +6,7 @@ var distribuisci=0, num=0, ultimoFiglio=0, mazziCompletati=0, punteggio=0;
 var nomeGiocatore="";
 var pausa=false, scorriTempo=false, newPartita=false,vincita=false; //cronometro;
 var velocitaCronometro=1000;
-var decineMinuti,unitaMinuti,decineSecondi,unitaSecondi,e,f,separatoreMinSec;
+var decineMinuti,unitaMinuti,decineSecondi,unitaSecondi,e,f,separatoreMinSec, cronometro;
 
 /*
 *	Chiedo il nome del giocatore, creo dinamicamente i 10 mazzi superiori, distribuisco il primo mazzo e controllo eventi sui bottoni
@@ -34,9 +34,15 @@ $(document).ready(function()
 	{
 	switchCronometro();
 		if (pausa==true)
+		{
 			$("#btnPausa").attr("value","Pausa");
+			alert("Gioco ripreso");
+		}
 		else 
+		{
 			$("#btnPausa").attr("value","Riprendi");
+			alert("Gioco in pausa");
+		}
 		pausa=!pausa;
 		
 	});
@@ -141,6 +147,8 @@ function distribuzionePrimoMazzo()
 */
 function distribuisciCarte()
 {
+	if (pausa==false)
+	{
 	if (distribuisci<=4)
 	{
 		for (i=0; i<10; i++)
@@ -161,7 +169,9 @@ function distribuisciCarte()
 	{
 		$("#bottomDeck").html("Carte esaurite!");
 	}
-	tmpArray();
+	}
+	else
+		alert("Il gioco è in pausa, per effetturare l'operazione prima riprenderlo")
 }
 
 
@@ -249,6 +259,9 @@ function drop()
 	$(".coveredDeck, .coveredDeck0").droppable({
 		tolerance: "touch",
      	drop: function( event, ui ){ 
+     	console.log(pausa);
+     	if (pausa==false)
+     	{
      		//Individuo la colonna della nuova carta
 			idDrop=$(this).parent().closest(".topDecks").attr("id");
 			//Individuo id dellla carta spostata
@@ -286,6 +299,8 @@ function drop()
 				$("#punteggio").html(punteggio-1)
 				}	
       		}
+      		}
+      		
     	});
     	//Gestisco la proprietà droppable delle colonne vuote
     	for (i=0; i<10; i++)
@@ -293,6 +308,9 @@ function drop()
     		$("#"+i).droppable({
     			tolerance: "touch",
      			drop: function( event, ui ){ 
+     			console.log(pausa);
+     			if (pausa==false)
+     			{
      				//Individuo la colonna della nuova carta
 					idDrop=$(this).attr("id");
 					//Individuo id della carta spostata
@@ -318,6 +336,7 @@ function drop()
 						$("#"+nID).removeClass("coveredDeck").addClass("coveredDeck0");
 						scopri(oldID);
 						aumentaMosse();		
+					}
 					}
 				 }
 			});
@@ -537,7 +556,6 @@ function tmpMostraTutte()
 */
 function switchCronometro()
 {   	
-	var cronometro;
     if(scorriTempo == false) 
     {            
     	//Riavvio del cronometro dopo la pausa
@@ -546,7 +564,7 @@ function switchCronometro()
         //Gestione nuova partita
         else
         {
-        	stringaTempo = "00:00";
+        	stringaTempo = "10:00";
             cronometro = setInterval(function() 
             {
                 avviaCronometro();
@@ -579,27 +597,33 @@ function avviaCronometro(){
     separatoreMinSec = ":";
     decineSecondi = parseInt(stringaTempo.charAt(3));
     unitaSecondi = parseInt(stringaTempo.charAt(4));
-                if(unitaSecondi >= 9) {
-                    unitaSecondi = 0;
-                    if(decineSecondi >= 5) {
-                        decineSecondi = 0;
-                        if(unitaMinuti >= 9) {
-                            unitaMinuti = 0;
-                            if(decineMinuti >= 9)
+                if(unitaSecondi <= 0) {
+                    unitaSecondi = 9;
+                    if(decineSecondi <= 0) {
+                        decineSecondi = 5;
+                        if(unitaMinuti <= 0) {
+                            unitaMinuti = 9;
+                            if(decineMinuti <=0)
                                 clearInterval(cronometro);
                             else
-                                decineMinuti++;
+                                decineMinuti--;
                         }
                         else
-                            unitaMinuti++;
+                            unitaMinuti--;
                     }
                     else
-                        decineSecondi++;
+                        decineSecondi--;
                 }
                 else
-                    unitaSecondi++;
+                    unitaSecondi--;
         //Stampo il tempo
         stringaTempo = String(decineMinuti) + String(unitaMinuti) + String(separatoreMinSec) + String(decineSecondi) + String(unitaSecondi);
+        if (stringaTempo=="00:00")
+        {
+        	clearInterval(cronometro);
+        	alert("Hai perso!");
+        	nuovaPartita();
+        }
         for ( i = 0; i < stringaTempo.length; i++ ) {
             $("#s" + i).html(stringaTempo.charAt(i))
         }
