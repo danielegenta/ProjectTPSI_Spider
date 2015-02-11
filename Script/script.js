@@ -2,7 +2,7 @@
 *	Variabili globali
 */
 var carte=[0,0,0,0,0,0,0,0,0,0,0,0,0];
-var distribuisci=0, num=0, ultimoFiglio=0, mazziCompletati=0;
+var distribuisci=0, num=0, ultimoFiglio=0, mazziCompletati=0, punteggio=0;
 var nomeGiocatore="";
 var pausa=false, scorriTempo=false, newPartita=false,vincita=false; //cronometro;
 var velocitaCronometro=1000;
@@ -116,7 +116,6 @@ function distribuzionePrimoMazzo()
         	//Se sono tra le colonne con 5 carte mostro l'ultima
         	if (j==4 && i>3)
         		mostraCarte(cella, id);
-        	tmpArray();
     	}
     }
     //Ciclo che gestisce le colonne con 6 carte
@@ -271,6 +270,8 @@ function drop()
 				}
 				scopri(oldID);
 				aumentaMosse();		
+				punteggio=parseInt($("#punteggio").html());
+				$("#punteggio").html(punteggio-1)
 				}	
       		}
     	});
@@ -383,7 +384,7 @@ function checkDrag()
 
 function scalaEffettuata(contenuto, colonna)
 {
-	var x, lunghezzaColonna, con;
+	var x, lunghezzaColonna, completamento;
 	mazziCompletati++;
 	lunghezzaColonna= ($('#'+colonna).find('div').length)-1;			
 	for(x=lunghezzaColonna; x>(lunghezzaColonna-13); x--)
@@ -393,12 +394,15 @@ function scalaEffettuata(contenuto, colonna)
 	lunghezzaColonna= ($('#'+colonna).find('div').length)-1;
 	if(lunghezzaColonna!=1)
 	{
-		con=$('#'+lunghezzaColonna+colonna).children().attr("name");
 		if (contenuto==undefined)
 		{
 			scopri($('#'+lunghezzaColonna+colonna).attr("id"));
 		}			
 	}
+	completamento=(12,5*mazziCompletati);
+	$("#completamento").attr("value", completamento);
+	punteggio=parseInt($("#punteggio").html());
+	$("#punteggio").html(punteggio+100);
 }
 
 
@@ -486,6 +490,7 @@ function controlloVittoria()
 	}
 }
 
+/* FUNZIONI TEMPORANEE DI DEBUG
 function tmpArray()
 {
 	$("#tmpArray").html("");
@@ -510,7 +515,7 @@ function tmpMostraTutte()
 		}
 		//console.log(valore);
 	}
-}
+}*/
 
 
 //------Funzioni legate a cronometro-------
@@ -621,6 +626,11 @@ function aiuti()
 		i++
 	}
 	while (aiuto==true && i<10)
+	if (aiuto==false)
+	{
+		punteggio=parseInt($("#punteggio").html());
+		$("#punteggio").html(punteggio-10);
+	}
 }
 
 /*
@@ -642,12 +652,12 @@ function evidenziaCarte(riga, riga2, i, colonna)
 	var timerAiuto = setInterval(function() 
     {
     	if (riga>0)
-			$('#'+riga+i).addClass("coveredDeck");
+			$('#'+riga+i).addClass("coveredDeck", 500);
 		else
 			$('#'+riga+i).addClass("coveredDeck0");
 		$('#'+riga+i).removeClass("cardHighlighted");
 		if (riga2>0)
-			$('#'+riga2+colonna).addClass("coveredDeck");
+			$('#'+riga2+colonna).addClass("coveredDeck", 500);
 		else
 			$('#'+riga2+colonna).addClass("coveredDeck0");
 		$('#'+riga2+colonna).removeClass("cardHighlighted");
