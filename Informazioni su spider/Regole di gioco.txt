@@ -1,0 +1,10 @@
+PUNTI INZIALI 500
+Scala completa:98 punti!
+se si sposta una carta su un altra:3 punti. (ex. 3 su 4)
+se si sposta la stessa carta piu di una volta si toglie 2 punti.
+se lasci uno spazio vuoto si toglie 2 punti.
+se ci metti una carta in uno spazio vuoto ti da 3 punti.
+un aiuto ti spiazz 1 punto.
+
+In Windows si inizia con 500 punti ed ogni mossa effettuata sottrae 1 punto; a fine partita questo punteggio viene moltiplicato per 100.
+Cerca sempre di superare il tuo ultimo record!

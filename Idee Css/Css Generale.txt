@@ -1,0 +1,15 @@
+CSS COMPLESSI
+1)http://www.noqta.it/dromoscopio/
+2)http://www.dinpattern.com/
+
+CSS GENERATOR
+1)http://designinstruct.com/roundups/css-gradient-generators/
+
+CSS SEMPLICi
+1)http://bennettfeely.com/gradients/
+
+CSS INSERIMENTO NOME MATERIAL DESIGN
+1)https://scotch.io/tutorials/google-material-design-input-boxes-in-css3
+
+MATERIAL DESIGN BOTTONI
+1)http://callemall.github.io/material-ui/#/components/buttons

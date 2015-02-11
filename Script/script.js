@@ -25,7 +25,7 @@ $(document).ready(function()
 		alert("Work in progress!")
 	});
 	$("#btnHint").click(function(){
-		alert("Work in progress!")
+		aiuti();
 	});
 	$("#btnDemoVittoria").click(function(){
 		alert("Work in progress!")
@@ -336,12 +336,13 @@ function scopri(oldID)
 function checkDrag()
 {
 	var scala=true;
-	var valoreScala=0, contenuto=0,colonna=0, i=0;
+	var valoreScala=0, contenuto=0,colonna=0, i=0, scalaCompleta=0;
 	//Aggiorno gli ID
 	checkID();
 	//Scorro le 10 colonne
 	for (colonna=0; colonna<10; colonna++)
 	{
+		scalaCompleta=0;
 		scala=true;
 		//Individuo la lunghezza della colonna (quante carte sono appese)
 		var count= ($('#'+colonna).find('div').length)-1;
@@ -361,6 +362,7 @@ function checkDrag()
 				{
 					$("#"+i+colonna).draggable( 'enable' );
 					valoreScala+=1;	
+					scalaCompleta++;
 				}
 				//Se il valore non continua la scala rendo la carta non draggabile
 				else
@@ -370,9 +372,36 @@ function checkDrag()
 				}
 			}
 		}
+		if (scalaCompleta==12)
+			scalaEffettuata(contenuto, colonna);
+		if (mazziCompletati==8)
+			controlloVittoria();
 	}
 	drag();
 }
+
+
+function scalaEffettuata(contenuto, colonna)
+{
+	var x, lunghezzaColonna, con;
+	mazziCompletati++;
+	lunghezzaColonna= ($('#'+colonna).find('div').length)-1;			
+	for(x=lunghezzaColonna; x>(lunghezzaColonna-13); x--)
+	{
+		$("#"+x+colonna).remove();
+	}
+	lunghezzaColonna= ($('#'+colonna).find('div').length)-1;
+	if(lunghezzaColonna!=1)
+	{
+		con=$('#'+lunghezzaColonna+colonna).children().attr("name");
+		if (contenuto==undefined)
+		{
+			scopri($('#'+lunghezzaColonna+colonna).attr("id"));
+		}			
+	}
+}
+
+
 
 /*
 *	Funzione che si occupa di azzerare la proprietà draggable al fine di evitare errori dopo la distribuzione delle carte
@@ -432,6 +461,9 @@ function aumentaMosse()
 *	Funzioni ancora da fare/finire
 */
 
+/*
+*	Funzione che re-inizializza la partita
+*/
 function nuovaPartita()
 {}
 
@@ -442,14 +474,15 @@ function animazioneVittoria()
 {}
 
 
+/*
+* 	Funzione che gestisce la vittoria
+*/
 function controlloVittoria()
 {
-	//controllo mazzo completato
-	//se completato aumento mazzi completati e progressbar
-	//controllo vittoria
 	if (mazziCompletati==8)
 	{
 		alert("hai vinto!")
+		nuovaPartita();
 	}
 }
 
@@ -475,8 +508,8 @@ function tmpMostraTutte()
 		{
 			valore+=" "+String($("#"+j+i).attr("value"));
 		}
-		console.log(valore);
-}
+		//console.log(valore);
+	}
 }
 
 
@@ -557,3 +590,67 @@ function avviaCronometro(){
 }
 
 
+/*
+*	Funzione che gestisce gli aiuti
+*/
+function aiuti()
+{
+	var i, colonna, riga, riga2, aiuto;
+	i=0;
+	aiuto=true;
+	//Per ogni colonna confronto il valore dell'ultima carta con quello delle ultime carte delle altre colonna
+	do
+	{
+		riga= $('#'+i).find('div').length-1;
+		for (colonna=0; colonna<10; colonna++)
+		{
+			riga2=$('#'+colonna).find('div').length-1;
+			//Se l'aiuto non è ancora stato dato
+			if (aiuto==true)
+			{
+				valore=$('#'+riga+i).attr("value");
+				valore2=parseInt($('#'+riga2+colonna).attr("value"))+1
+				if (valore==valore2)
+				{
+					aiuto=false;
+					//Gestisco la visibilità dell'aiuto
+					evidenziaCarte(riga, riga2, i, colonna);
+				}
+			}
+		}
+		i++
+	}
+	while (aiuto==true && i<10)
+}
+
+/*
+* 	Funzione che gestisce le carte evidenziate 
+*/
+function evidenziaCarte(riga, riga2, i, colonna)
+{
+	//Le carte rimangono evidenziate (bordo giallo) per un secondo e poi tornano normali
+	if (riga>0)
+		$('#'+riga+i).removeClass("coveredDeck");
+	else
+		$('#'+riga+i).removeClass("coveredDeck0");
+	$('#'+riga+i).addClass("cardHighlighted");
+	if (riga2>0)
+		$('#'+riga2+colonna).removeClass("coveredDeck");
+	else
+		$('#'+riga2+colonna).removeClass("coveredDeck0");
+	$('#'+riga2+colonna).addClass("cardHighlighted");
+	var timerAiuto = setInterval(function() 
+    {
+    	if (riga>0)
+			$('#'+riga+i).addClass("coveredDeck");
+		else
+			$('#'+riga+i).addClass("coveredDeck0");
+		$('#'+riga+i).removeClass("cardHighlighted");
+		if (riga2>0)
+			$('#'+riga2+colonna).addClass("coveredDeck");
+		else
+			$('#'+riga2+colonna).addClass("coveredDeck0");
+		$('#'+riga2+colonna).removeClass("cardHighlighted");
+    },1000);
+	
+}

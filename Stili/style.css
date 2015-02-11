@@ -54,6 +54,16 @@ header, #tabellaInfo, #mainMenu
 }
 
 /*
+	Carte evidenziate (sistema di aiuti)
+*/
+.cardHighlighted
+{
+	height:100px;
+	margin-top:-50px;
+	border: 2px solid yellow;
+}
+
+/*
 	Carte coperte della prima colonna
 */
 .coveredDeck0
