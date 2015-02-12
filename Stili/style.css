@@ -60,7 +60,7 @@ header, #tabellaInfo, #mainMenu
 {
 	height:100px;
 	margin-top:-50px;
-	border: 2px solid yellow;
+	border: 6px solid yellow;
 }
 
 /*
@@ -157,3 +157,8 @@ h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-we
 */
 footer {color: black; font-family: "Great Vibes", cursive; font-size: 20px; line-height: 160px; font-weight: normal; margin-bottom: 0px; margin-top: 600px; text-align: center; text-shadow: 0 1px 1px #fff; }
 footer:hover {color: white;}
+
+#listaTabs
+{
+	list-style: none;
+}

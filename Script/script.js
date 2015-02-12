@@ -13,6 +13,7 @@ var decineMinuti,unitaMinuti,decineSecondi,unitaSecondi,e,f,separatoreMinSec, cr
 */
 $(document).ready(function()
 {	
+	 $( "#tabs" ).tabs({active:0});
 	//Funzione che richiede tramite input-box in nome del giocatore
 	inputGiocatore();
 	switchCronometro();
