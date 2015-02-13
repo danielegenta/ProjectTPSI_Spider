@@ -27,7 +27,22 @@
 				<li><a href="#tab-gioco">Partita</a></li>
 			</ul>
 		<div id="tab-iniziale">
-			Nome: <input type="text"  id="txtNome">
+		<!--<label for="txtNome">Nome:</label>
+			<input type="text"  id="txtNome" class="input">-->
+			<form>
+   				 <div class="group">      
+      			<input type="text" id="txtNome" required>
+      			<span class="highlight"></span>
+      			<span class="bar"></span>
+     		 	<label>Name</label>
+    			</div>
+    			<div class="group">      
+      				<input type="text" required>
+      				<span class="highlight"></span>
+     				<span class="bar"></span>
+      				<label>Test</label>
+    			</div>
+ 			 </form>
 			<input type="button" value="Inzia la partita" id="btnInizia" class="btn">
 		</div>
 		<!--Tabella contenente informazioni e statistiche partita-->

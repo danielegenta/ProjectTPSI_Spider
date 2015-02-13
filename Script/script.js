@@ -15,12 +15,8 @@ $(document).ready(function()
 {	
 	 $( "#tabs" ).tabs({active:0});
 	//Funzione che richiede tramite input-box in nome del giocatore
-	inputGiocatore();
-	switchCronometro();
-	//Funzione creante i 10 div padre che ospiteranno le carte
-	creazioneTopDecks();
-	//Funzione che distribuisci le prime 54 carte coperte (scoprendo poi l'ultima colonna)
-	distribuzionePrimoMazzo();
+	//inputGiocatore();
+	
 	//Intercetto eventi click sui bottoni principali
 	$("#btnNuovaPartita").click(function(){
 		alert("Work in progress!")
@@ -47,6 +43,9 @@ $(document).ready(function()
 		pausa=!pausa;
 		
 	});
+	$("#btnInizia").click(function(){
+		inputGiocatore();
+	});
 	//Funzione che rende l'ultima carta di ogni colonna draggabile
 	drag();
 	//Funzione che rende tutte le carte droppabili
@@ -58,10 +57,16 @@ $(document).ready(function()
 */
 function inputGiocatore()
 {
-	nomeGiocatore=prompt("Inserire nome giocatore", nomeGiocatore);
+	/*nomeGiocatore=prompt("Inserire nome giocatore", nomeGiocatore);
+	if (nomeGiocatore=="" || nomeGiocatore==null || nomeGiocatore==undefined)
+		nomeGiocatore="Player 1";
+	$("#nomeGiocatore").html(nomeGiocatore);*/
+	nomeGiocatore=$("#txtNome").val();
 	if (nomeGiocatore=="" || nomeGiocatore==null || nomeGiocatore==undefined)
 		nomeGiocatore="Player 1";
 	$("#nomeGiocatore").html(nomeGiocatore);
+	$( "#tabs" ).tabs({active:2});
+	nuovaPartita();
 }
 
 /*
@@ -501,13 +506,23 @@ function aumentaMosse()
 *	Funzione che re-inizializza la partita
 */
 function nuovaPartita()
-{}
+{
+	switchCronometro();
+	//Funzione creante i 10 div padre che ospiteranno le carte
+	creazioneTopDecks();
+	//Funzione che distribuisci le prime 54 carte coperte (scoprendo poi l'ultima colonna)
+	distribuzionePrimoMazzo();
+}
 
 function hint()
-{}
+{
+
+}
 
 function animazioneVittoria()
-{}
+{
+
+}
 
 
 /*
