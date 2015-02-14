@@ -266,7 +266,6 @@ function drag()
         $('#'+i+' div:last').draggable({revert:true});
         $('#'+i+' div:last').draggable( 'enable' );
 	}
-	 
 }
 
 
