@@ -16,6 +16,7 @@ $(document).ready(function()
 	$("#menuTab-Gioco").hide();
 	$("#menuTab-Statistiche").hide();
 	$("#menuTab-Informazioni").hide();
+	$("#menuTab-SchermataIniziale").hide();
 	 $( "#tabs" ).tabs({active:0});
 	//Funzione che richiede tramite input-box in nome del giocatore
 	//Intercetto eventi click sui bottoni principali
@@ -72,7 +73,6 @@ function inputGiocatore()
 		nomeGiocatore="Player 1";
 	$("#nomeGiocatore").html(nomeGiocatore);
 	$( "#tabs" ).tabs({active:2});
-	$("#menuTab-SchermataIniziale").hide("slow");
 	$("#menuTab-Gioco").show("slow");
 	$("#menuTab-Statistiche").show("slow");
 	$("#menuTab-Informazioni").show("slow");
@@ -562,7 +562,6 @@ function inizializzaPartita()
 	 $("#menuTab-Gioco").hide();
 	 $("#menuTab-Statistiche").hide();
 	 $("#menuTab-Informazioni").hide();
-	 $("#menuTab-SchermataIniziale").show();
 	 $( "#tabs" ).tabs({active:0});
 	 for (i=0; i<10; i++)
 	 {
