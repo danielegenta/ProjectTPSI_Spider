@@ -24,19 +24,17 @@ $(document).ready(function()
 		nuovaPartita();
 	});
 	$("#btnHint").click(function(){
-	if (scorriTempo==true)
+	if (pausa==false)
 		aiuti();
 	else
-		alert("Partita non iniziata")
+		alert("Partita in pausa")
 	});
 	$("#btnDemoVittoria").click(function(){
 		alert("Work in progress!")
 	});
 	$("#btnPausa").click(function()
 	{
-	if (scorriTempo==true)
-	{
-	switchCronometro();
+		switchCronometro();
 		if (pausa==true)
 		{
 			$("#btnPausa").attr("value","Pausa");
@@ -48,11 +46,6 @@ $(document).ready(function()
 			alert("Gioco in pausa");
 		}
 		pausa=!pausa;
-		}
-		else
-		{
-			alert("Partita non iniziata");
-		}
 	});
 	$("#btnInizia").click(function(){
 		nuovaPartita();
