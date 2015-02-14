@@ -2,7 +2,7 @@
 *	Variabili globali
 */
 var carte=[0,0,0,0,0,0,0,0,0,0,0,0,0];
-var distribuisci=0, num=0, ultimoFiglio=0, mazziCompletati=0, punteggio=0;
+var distribuisci=0, num=0, ultimoFiglio=0, mazziCompletati=0, punteggio=0, ultimaAppesa=-1, precedenteHost=-1;
 var nomeGiocatore="", stringaTempo="10:00";
 var pausa=false, scorriTempo=false, newPartita=false,vincita=false, primaPartita=true; //cronometro;
 var velocitaCronometro=1000;
@@ -31,6 +31,10 @@ $(document).ready(function()
 	});
 	$("#btnDemoVittoria").click(function(){
 		alert("Work in progress!")
+	});
+	$("#btnUndo").click(function()
+	{
+		annullaMossa();
 	});
 	$("#btnPausa").click(function()
 	{
@@ -307,12 +311,11 @@ function drop()
 				if (tmp=="0")
 				{
 					$("#"+nID).removeClass("coveredDeck0").addClass("coveredDeck");
-					console.log("cambio classe "+nID);
 				}
+				ultimaAppesa=nID;
 				scopri(oldID);
 				aumentaMosse();		
-				punteggio=parseInt($("#punteggio").html());
-				$("#punteggio").html(punteggio-1)
+				
 				}	
       		}
       		}
@@ -347,6 +350,7 @@ function drop()
 						$('#'+idDrop).append($("#"+idDrag));
 						$("#"+idDrag).attr("id",nID);
 						$( "#"+nID).draggable({revert:true});
+						ultimaAppesa=nID;
 						//!!fare controllo su scopri (ultima carta)
 						//Cambio dinamicamente la classe (margin-top)
 						$("#"+nID).removeClass("coveredDeck").addClass("coveredDeck0");
@@ -371,6 +375,8 @@ function scopri(oldID)
 	if (oldID.lenght==3)
 		riga=oldID.substring(2,3);
 	var scopri=$('#'+riga+' div:last').attr("id");
+	precedenteHost=scopri;
+	console.log(precedenteHost);
 	//Giro la carta assegnandole una immagine il base al suo valore e la rendo draggabile
 	$("#"+scopri).html('<img name='+$("#"+scopri).attr("value")+' src="img/'+$("#"+scopri).attr("value")+'.jpg">');
 	$("#"+scopri).draggable({revert:true,revertDuration:200});
@@ -448,11 +454,8 @@ function scalaEffettuata(contenuto, colonna)
 	}
 	completamento=(12,5*mazziCompletati);
 	$("#completamento").attr("value", completamento);
-	punteggio=parseInt($("#punteggio").html());
-	$("#punteggio").html(punteggio+100);
+	cambiaPunteggio(100);
 }
-
-
 
 /*
 *	Funzione che si occupa di azzerare la proprietà draggable al fine di evitare errori dopo la distribuzione delle carte
@@ -506,6 +509,7 @@ function aumentaMosse()
 	nMosse=$("#numeroMosse").html();
 	nMosse++;
 	nMosse=$("#numeroMosse").html(nMosse);
+	cambiaPunteggio(-1);
 }
 
 /*
@@ -692,8 +696,7 @@ function aiuti()
 	while (aiuto==true && i<10)
 	if (aiuto==false)
 	{
-		punteggio=parseInt($("#punteggio").html());
-		$("#punteggio").html(punteggio-10);
+		cambiaPunteggio(-10)
 	}
 }
 
@@ -724,4 +727,35 @@ function evidenziaCarte(riga, riga2, i, colonna)
 		else
 			$('#'+riga2+colonna).addClass("coveredDeck0");
 		$('#'+riga2+colonna).removeClass("cardHighlighted", 1000);
+}
+
+/*
+*	Funzione che gestisce l'undo della mossa
+*/
+function annullaMossa()
+{
+		if  (ultimaAppesa!=-1 && precedenteHost!=-1)
+		{
+			ultimaAppesa-=10;
+			precedenteHost-=10;
+			$("#"+precedenteHost).append($("#"+ultimaAppesa));
+			cambiaPunteggio(-10)
+			ultimaAppesa=-1
+			precedenteHost=-1
+			azzeraDrag();
+			checkID();
+			drop();
+			drag();
+			checkDrag();
+		}
+}
+
+/*
+*	Funzione che gestisce incremento/decremento punteggio
+*/
+function cambiaPunteggio(offset)
+{
+	punteggio=parseInt($("#punteggio").html());
+	if (punteggio>0)
+		$("#punteggio").html(punteggio+offset);
 }
