@@ -8,22 +8,6 @@ header, #tabellaInfo, #mainMenu
 	text-align:center;
 }
 
-h1
-{
-	display: inline;
-	position: relative;
-	font: 150px Helvetica, Sans-Serif;
-	letter-spacing: -5px;
-	color: rgba(0,0,255,0.5);
-}
-
-h1:after
-{
-	content: "Spider";
-	position: absolute; left: 10px; top: 5px;
-	color: rgba(255,0,0,0.5); 
-}
-
 /*
 	Mazzi superiori
 */
@@ -126,7 +110,7 @@ h1:after
 */
  .btn:hover
  {
- 	background: green;color: white;
+ 	background: #4285f4;color: white;
  }
 
 p
@@ -137,8 +121,22 @@ p
 /*
 	Titolo e sottotiolo
 */
-/*h1 { color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 50px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center; }
-*/
+
+h1
+{
+	display: inline;
+	position: relative;
+	font: 150px Helvetica, Sans-Serif;
+	letter-spacing: -5px;
+	color: rgba(0,0,255,0.5);
+}
+
+h1:after
+{
+	content: "Spider";
+	position: absolute; left: 10px; top: 5px;
+	color: rgba(255,0,0,0.5); 
+}
 
 h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-weight: 300; line-height: 32px; margin: 0 0 72px; text-align: center; }
 
@@ -146,28 +144,31 @@ h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-we
 /*
 	Tabella informazioni su partita
 */
-.flat-table
-{
-	margin-bottom: 20px;
-	border-collapse:collapse;
-	font-family: 'Lato', Calibri, Arial, sans-serif;
-	border: none;
-    border-radius: 3px;
+
+.example-table {
+top: 500px;
+font-family: sans-serif;
+-webkit-font-smoothing: antialiased;
+font-size: 115%;
+width: auto;
+
+overflow: auto;
+display: block;
 }
-.flat-table th, .flat-table td 
-{
-	box-shadow: inset 0 -1px rgba(0,0,0,0.25), 
-	inset 0 1px rgba(0,0,0,0.25);
+.example-table th {
+/*background-color: rgb(112, 196, 105);*/
+background: #4285f4;
+font-weight: normal;
+color: white;
+padding: 20px 30px;
+text-align: center;
 }
-.flat-table td 
-{
-	color: #f7f7f7;
-	padding: 0.7em 1em 0.7em 1.15em;
-	text-shadow: 0 0 1px rgba(255,255,255,0.1);
-	font-size: 1.4em;
+.example-table td {
+background-color: rgb(238, 238, 238);
+padding: 20px 30px;
+color: rgb(111, 111, 111);
 }
-.flat-table tr {transition: background 0.3s, box-shadow 0.3s;}
-.flat-table tr:hover {background: rgba(0,0,0,0.19);}
+
 
 /*
 	Piè di pagina
@@ -175,18 +176,28 @@ h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-we
 footer {color: black; font-family: "Great Vibes", cursive; font-size: 20px; line-height: 160px; font-weight: normal; margin-bottom: 0px; margin-top: 600px; text-align: center; text-shadow: 0 1px 1px #fff; }
 footer:hover {color: white;}
 
-#listaTabs
+/*
+	Menù di scelta tab
+*/
+
+.menuTab
 {
-	list-style: none;
+	text-align: center;
+	margin-left: auto;
+	margin right: auto;
+	width:80%;
 }
 
-ul {
+ul 
+{
+  text-align: center;
+  vertical-align: centre;
   overflow: auto;
   list-style-type: none;
-  margin-left:20%;
 }
  
 li {
+	text-align:center;
   height: 25px;
   float: left;
   margin-right: 0px;
@@ -211,46 +222,36 @@ li a {
   transition: all 0.5s ease;
 }
  
-li a:hover {
+li a:hover 
+{
   color: #666;
 }
  
-li.active a {
+li.active a 
+{
   font-weight: bold;
   color: #333;
 }
 
- .inputs {
-    height: 50px;
-    padding: 0 10px;
-    border: none;
-    background: #FFF;
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
-    font-family: 'Montserrat', sans-serif;
-    text-indent: 10px;
-    color: #EE4C8D;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    font-size: 20px;
-    width: 270px;
+
+
+
+/*
+	Input nome nella schermata iniziale
+*/
+
+.container
+{ 
+  font-family:'Roboto';
+  width:600px; 
+  margin:30px auto 0; 
+  display:block; 
+  background:#FFF;
+  padding:10px 50px 50px;
 }
 
-.inputs:focus {
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 1px 1px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(255, 255, 255, 0.15);
-    outline: none;
-    background: #F7DEF7;
-    background: rgba(255, 255, 255, 0.4);
-    outline: solid 1px #EE4C8D;
-}
-
-#tab-iniziale
+input 				
 {
-	/*margin-top: 300px;
-	margin-left: 400px;*/
-}
-
-
-input 				{
   font-size:18px;
   padding:10px 10px 10px 5px;
   display:block;
@@ -258,10 +259,11 @@ input 				{
   border:none;
   border-bottom:1px solid #757575;
 }
-input:focus 		{ outline:none; }
+input:focus 		
+{ outline:none; }
 
-/* LABEL ======================================= */
-label 				 {
+label 				 
+{
   color:#999; 
   font-size:18px;
   font-weight:normal;
@@ -274,14 +276,13 @@ label 				 {
   -webkit-transition:0.2s ease all;
 }
 
-/* active state */
-input:focus ~ label, input:valid ~ label 		{
+input:focus ~ label, input:valid ~ label 		
+{
   top:-20px;
   font-size:14px;
   color:#5264AE;
 }
 
-/* BOTTOM BARS ================================= */
 .bar 	{ position:relative; display:block; width:300px; }
 .bar:before, .bar:after 	{
   content:'';
@@ -301,12 +302,10 @@ input:focus ~ label, input:valid ~ label 		{
   right:50%; 
 }
 
-/* active state */
 input:focus ~ .bar:before, input:focus ~ .bar:after {
   width:50%;
 }
 
-/* HIGHLIGHTER ================================== */
 .highlight {
   position:absolute;
   height:60%; 
@@ -317,14 +316,12 @@ input:focus ~ .bar:before, input:focus ~ .bar:after {
   opacity:0.5;
 }
 
-/* active state */
 input:focus ~ .highlight {
   -webkit-animation:inputHighlighter 0.3s ease;
   -moz-animation:inputHighlighter 0.3s ease;
   animation:inputHighlighter 0.3s ease;
 }
 
-/* ANIMATIONS ================ */
 @-webkit-keyframes inputHighlighter {
 	from { background:#5264AE; }
   to 	{ width:0; background:transparent; }
@@ -341,4 +338,27 @@ input:focus ~ .highlight {
 .group 			  { 
   position:relative; 
   margin-bottom:45px; 
+}
+
+.btnInizia 
+{
+ display: inline-block;
+      position: relative;
+      width: 120px;
+      height: 32px;
+      border-radius: 2px;
+      font-size: 0.9em;
+      text-align: center;
+      vertical-align: centre;
+      background-color: #4285f4;
+      color: #fff;
+      transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	  transition-delay: 0.2s;
+	  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+.btnInizia:active
+{
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+	transition-delay: 0s;
 }

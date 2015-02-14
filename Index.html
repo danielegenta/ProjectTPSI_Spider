@@ -11,43 +11,43 @@
 		<script type="text/javascript" src="Script/offline/jquery.js"> </script>
 		<script type="text/javascript" src="Script/offline/jquery-ui.js"> </script>
 		<script type="text/javascript" src="Script/script.js"> </script>
-		<!--<script type="text/javascript" src="Script/countdown.js"> </script>-->
 	</head>
 	<!--Titolo e sottotiolo-->
 	<header>
 		<h1>Spider</h1>
-		<h2>Gioco di carte.</h2>
+		<h2>Gioco di carte</h2>
 	</header>
 	<body class="main">
-	<!--Top-menù: principali bottoni di interazione-->
+	<!--Interfaccia a tab-->
 		<div id="tabs">
+			<!--Scelta del tab-->
+			<div class=menuTab>
 			<ul id="listaTabs">
 				<li><a href="#tab-iniziale">Schermata iniziale</a></li>
 				<li><a href="#tab-statistiche">Statistiche partita</a></li>
 				<li><a href="#tab-gioco">Partita</a></li>
+				<li><a href="#tab-informazioni">Informazioni</a></li>
 			</ul>
+			</div>
+		<!--Tab di input del nome del giocatore-->
 		<div id="tab-iniziale">
-		<!--<label for="txtNome">Nome:</label>
-			<input type="text"  id="txtNome" class="input">-->
-			<form>
-   				 <div class="group">      
-      			<input type="text" id="txtNome" required>
-      			<span class="highlight"></span>
-      			<span class="bar"></span>
-     		 	<label>Name</label>
-    			</div>
-    			<div class="group">      
-      				<input type="text" required>
-      				<span class="highlight"></span>
-     				<span class="bar"></span>
-      				<label>Test</label>
-    			</div>
- 			 </form>
-			<input type="button" value="Inzia la partita" id="btnInizia" class="btn">
+			<div class="container">
+  				<h2>Inserisci il tuo nome per iniziare a giocare</h2>
+				<form>
+   					<div class="group">      
+      					<input type="text" id="txtNome" required>
+      					<span class="highlight"></span>
+      					<span class="bar"></span>
+     		 			<label>Nome giocatore</label>
+    				</div>
+ 			 	</form>
+				<input type="button" value="Inzia la partita" id="btnInizia" class="btnInizia">
+			</div>
 		</div>
-		<!--Tabella contenente informazioni e statistiche partita-->
+		<!--Tab contenente informazioni e statistiche partita-->
 		<div id="tab-statistiche">
-			<table id="tabellaInfo" class="flat-table">
+			<table id="tabellaInfo" class="example-table">
+			<tr><th colspan="6">Riepilogo partita</th></tr>
 				<tr>
 					<td>Mosse:</td><td><div id="numeroMosse">0</div></td>
 					<td>Cronometro:</td><td><div id="counter">
@@ -59,7 +59,7 @@
 					</div></td>
 				</tr>
 				<tr>
-					<td>Giocatore:</td><td><div id="nomeGiocatore"></div></td>
+					<td>Giocatore:</td><td><div id="nomeGiocatore">Player 1</div></td>
 					<td>Punteggio:</td><td><div id="punteggio">500</div></td>
 				</tr>
 				<tr>
@@ -68,23 +68,27 @@
 			</table>
 		</div>
 		<br><br>
+		<!--Tab di gioco della partita-->
 		<div id="tab-gioco">
-		<div id="mainMenu">
-			<input type="button" value="Nuova partita" id="btnNuovaPartita" class="btn">
-			<input type="button" value="Hint" id="btnHint" class="btn">
-			<input type="button" value="Demo vittoria" id="btnDemoVittoria" class="btn">
-			<input type="button" value="Pausa" id="btnPausa" class="btn">
+			<!--Top-menù: principali bottoni di interazione-->
+			<div id="mainMenu">
+				<input type="button" value="Nuova partita" id="btnNuovaPartita" class="btn">
+				<input type="button" value="Hint" id="btnHint" class="btn">
+				<input type="button" value="Demo vittoria" id="btnDemoVittoria" class="btn">
+				<input type="button" value="Pausa" id="btnPausa" class="btn">
+			</div>
+			<br><br>
+			<!--Contenitore mazzo superiore-->
+			<div id="topDeck">
+			</div>
+			<!--Contenitore mazzo inferiore-->
+			<div id="bottomDeck" onclick="distribuisciCarte()">
+				<img src="img/carta_retro.jpg">
+			</div>
 		</div>
-		<br><br>
-		<!--Contenitore mazzo superiore-->
-		<div id="topDeck">
+		<!--Tab di informazioni (come si gioca, crediti e regole)-->
+		<div id="tab-informazioni">
 		</div>
-		<!--Contenitore mazzo inferiore-->
-		<div id="bottomDeck" onclick="distribuisciCarte()">
-			<img src="img/carta_retro.jpg">
-		</div>
-		</div>
-		
 		</div>
 		<!--Piè di pagina-->
 		<footer>

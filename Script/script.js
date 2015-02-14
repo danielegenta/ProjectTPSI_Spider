@@ -15,7 +15,6 @@ $(document).ready(function()
 {	
 	 $( "#tabs" ).tabs({active:0});
 	//Funzione che richiede tramite input-box in nome del giocatore
-	//inputGiocatore();
 	
 	//Intercetto eventi click sui bottoni principali
 	$("#btnNuovaPartita").click(function(){
@@ -44,7 +43,7 @@ $(document).ready(function()
 		
 	});
 	$("#btnInizia").click(function(){
-		inputGiocatore();
+		nuovaPartita();
 	});
 	//Funzione che rende l'ultima carta di ogni colonna draggabile
 	drag();
@@ -57,16 +56,11 @@ $(document).ready(function()
 */
 function inputGiocatore()
 {
-	/*nomeGiocatore=prompt("Inserire nome giocatore", nomeGiocatore);
-	if (nomeGiocatore=="" || nomeGiocatore==null || nomeGiocatore==undefined)
-		nomeGiocatore="Player 1";
-	$("#nomeGiocatore").html(nomeGiocatore);*/
 	nomeGiocatore=$("#txtNome").val();
 	if (nomeGiocatore=="" || nomeGiocatore==null || nomeGiocatore==undefined)
 		nomeGiocatore="Player 1";
 	$("#nomeGiocatore").html(nomeGiocatore);
 	$( "#tabs" ).tabs({active:2});
-	nuovaPartita();
 }
 
 /*
@@ -153,6 +147,8 @@ function distribuzionePrimoMazzo()
 */
 function distribuisciCarte()
 {
+	if (scorriTempo==true)
+	{
 	if (pausa==false)
 	{
 	if (distribuisci<=4)
@@ -177,7 +173,10 @@ function distribuisciCarte()
 	}
 	}
 	else
-		alert("Il gioco è in pausa, per effetturare l'operazione prima riprenderlo")
+		alert("Il gioco e' in pausa, per effetturare l'operazione prima riprenderlo");
+	}
+	else
+		alert("Partita non ancora iniziata");
 }
 
 
@@ -507,23 +506,13 @@ function aumentaMosse()
 */
 function nuovaPartita()
 {
+	inputGiocatore();
 	switchCronometro();
 	//Funzione creante i 10 div padre che ospiteranno le carte
 	creazioneTopDecks();
 	//Funzione che distribuisci le prime 54 carte coperte (scoprendo poi l'ultima colonna)
 	distribuzionePrimoMazzo();
 }
-
-function hint()
-{
-
-}
-
-function animazioneVittoria()
-{
-
-}
-
 
 /*
 * 	Funzione che gestisce la vittoria
