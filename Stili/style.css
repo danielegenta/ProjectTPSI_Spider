@@ -75,7 +75,7 @@ header, #tabellaInfo, #mainMenu
 */
 .main
 {
-	 background: #2ecc71; 
+	 background: #00C853; 
 }
 
 /*
@@ -145,17 +145,16 @@ h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-we
 	Tabella informazioni su partita
 */
 
-.example-table {
-top: 500px;
+.stats-table {
 font-family: sans-serif;
 -webkit-font-smoothing: antialiased;
-font-size: 115%;
-width: auto;
-
+font-size: 200%;
+width: 80%;
+height: 300px;
 overflow: auto;
 display: block;
 }
-.example-table th {
+.stats-table th {
 /*background-color: rgb(112, 196, 105);*/
 background: #4285f4;
 font-weight: normal;
@@ -163,7 +162,7 @@ color: white;
 padding: 20px 30px;
 text-align: center;
 }
-.example-table td {
+.stats-table td {
 background-color: rgb(238, 238, 238);
 padding: 20px 30px;
 color: rgb(111, 111, 111);
@@ -224,7 +223,7 @@ li a {
  
 li a:hover 
 {
-  color: #666;
+  color: #4285f4;
 }
  
 li.active a 
@@ -290,7 +289,7 @@ input:focus ~ label, input:valid ~ label
   width:0;
   bottom:1px; 
   position:absolute;
-  background:#5264AE; 
+  background:#4285f4; 
   transition:0.2s ease all; 
   -moz-transition:0.2s ease all; 
   -webkit-transition:0.2s ease all;
@@ -362,3 +361,4 @@ input:focus ~ .highlight {
 	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
 	transition-delay: 0s;
 }
+

@@ -3,8 +3,8 @@
 */
 var carte=[0,0,0,0,0,0,0,0,0,0,0,0,0];
 var distribuisci=0, num=0, ultimoFiglio=0, mazziCompletati=0, punteggio=0;
-var nomeGiocatore="";
-var pausa=false, scorriTempo=false, newPartita=false,vincita=false; //cronometro;
+var nomeGiocatore="", stringaTempo="10:00";
+var pausa=false, scorriTempo=false, newPartita=false,vincita=false, primaPartita=true; //cronometro;
 var velocitaCronometro=1000;
 var decineMinuti,unitaMinuti,decineSecondi,unitaSecondi,e,f,separatoreMinSec, cronometro;
 
@@ -13,20 +13,27 @@ var decineMinuti,unitaMinuti,decineSecondi,unitaSecondi,e,f,separatoreMinSec, cr
 */
 $(document).ready(function()
 {	
+	$("#menuTab-Gioco").hide();
+	$("#menuTab-Statistiche").hide();
+	$("#menuTab-Informazioni").hide();
 	 $( "#tabs" ).tabs({active:0});
 	//Funzione che richiede tramite input-box in nome del giocatore
-	
 	//Intercetto eventi click sui bottoni principali
 	$("#btnNuovaPartita").click(function(){
-		alert("Work in progress!")
+		nuovaPartita();
 	});
 	$("#btnHint").click(function(){
+	if (scorriTempo==true)
 		aiuti();
+	else
+		alert("Partita non iniziata")
 	});
 	$("#btnDemoVittoria").click(function(){
 		alert("Work in progress!")
 	});
 	$("#btnPausa").click(function()
+	{
+	if (scorriTempo==true)
 	{
 	switchCronometro();
 		if (pausa==true)
@@ -40,7 +47,11 @@ $(document).ready(function()
 			alert("Gioco in pausa");
 		}
 		pausa=!pausa;
-		
+		}
+		else
+		{
+			alert("Partita non iniziata");
+		}
 	});
 	$("#btnInizia").click(function(){
 		nuovaPartita();
@@ -61,6 +72,10 @@ function inputGiocatore()
 		nomeGiocatore="Player 1";
 	$("#nomeGiocatore").html(nomeGiocatore);
 	$( "#tabs" ).tabs({active:2});
+	$("#menuTab-SchermataIniziale").hide("slow");
+	$("#menuTab-Gioco").show("slow");
+	$("#menuTab-Statistiche").show("slow");
+	$("#menuTab-Informazioni").show("slow");
 }
 
 /*
@@ -140,6 +155,9 @@ function distribuzionePrimoMazzo()
         	//Mostra la carta (ovvero l'ultima delle prime 4 colonne)
         	mostraCarte(cella,id );
     }
+    checkID();
+	drop();
+	drag();
 }
 
 /*
@@ -506,13 +524,54 @@ function aumentaMosse()
 */
 function nuovaPartita()
 {
-	inputGiocatore();
-	switchCronometro();
-	//Funzione creante i 10 div padre che ospiteranno le carte
-	creazioneTopDecks();
-	//Funzione che distribuisci le prime 54 carte coperte (scoprendo poi l'ultima colonna)
-	distribuzionePrimoMazzo();
+	if (primaPartita==true)
+	{
+		primaPartita=false;
+		inputGiocatore();
+		switchCronometro();
+		//Funzione creante i 10 div padre che ospiteranno le carte
+		creazioneTopDecks();
+		//Funzione che distribuisci le prime 54 carte coperte (scoprendo poi l'ultima colonna)
+		distribuzionePrimoMazzo();
+	}
+	//Nuova partita ma non prima partita
+	else
+	{
+		clearInterval(cronometro);
+		inizializzaPartita();
+	}
+	
 }
+
+/*
+*	Funzione che si occupa di inizializzare una nuova partita
+*/
+function inizializzaPartita()
+{
+	 var i;
+	 carte=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+	 distribuisci=0;
+	 mazziCompletati=0;
+	 nomeGiocatore="";
+	 stringaTempo="10:00";
+	 pausa=false;
+	 scorriTempo=false;
+	 newPartita=false;
+	 vincita=false;
+	 primaPartita=true;
+	 $("#menuTab-Gioco").hide();
+	 $("#menuTab-Statistiche").hide();
+	 $("#menuTab-Informazioni").hide();
+	 $("#menuTab-SchermataIniziale").show();
+	 $( "#tabs" ).tabs({active:0});
+	 for (i=0; i<10; i++)
+	 {
+		 $( "#"+i ).remove();
+	 }
+	 $('#bottomDeck').html("");
+	 $('#bottomDeck').append('<img src="img/carta_retro.jpg">')
+}
+
 
 /*
 * 	Funzione che gestisce la vittoria
@@ -526,36 +585,8 @@ function controlloVittoria()
 	}
 }
 
-/* FUNZIONI TEMPORANEE DI DEBUG
-function tmpArray()
-{
-	$("#tmpArray").html("");
-	var supporto="";
-	for (i=0; i<13; i++)
-	{
-		 supporto+=carte[i];
-	}
-	$("#tmpArray").html(supporto);
-}
-
-function tmpMostraTutte()
-{
-	var i, id, count, valore, cella;
-	for (i=0; i<10;i++)
-	{
-		count= $('#'+i).find('div').length;
-		valore="";
-		for (j=0; j<count; j++)
-		{
-			valore+=" "+String($("#"+j+i).attr("value"));
-		}
-		//console.log(valore);
-	}
-}*/
-
 
 //------Funzioni legate a cronometro-------
-
 /*
 *	Funzione che gestisce il cronometro
 */

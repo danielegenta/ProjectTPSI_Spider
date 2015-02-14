@@ -23,10 +23,10 @@
 			<!--Scelta del tab-->
 			<div class=menuTab>
 			<ul id="listaTabs">
-				<li><a href="#tab-iniziale">Schermata iniziale</a></li>
-				<li><a href="#tab-statistiche">Statistiche partita</a></li>
-				<li><a href="#tab-gioco">Partita</a></li>
-				<li><a href="#tab-informazioni">Informazioni</a></li>
+				<li id="menuTab-SchermataIniziale"><a href="#tab-iniziale">Schermata iniziale</a></li>
+				<li id="menuTab-Statistiche"><a href="#tab-statistiche">Statistiche partita</a></li>
+				<li id="menuTab-Gioco"><a href="#tab-gioco">Partita</a></li>
+				<li id="menuTab-Informazioni"><a href="#tab-informazioni">Informazioni</a></li>
 			</ul>
 			</div>
 		<!--Tab di input del nome del giocatore-->
@@ -46,7 +46,8 @@
 		</div>
 		<!--Tab contenente informazioni e statistiche partita-->
 		<div id="tab-statistiche">
-			<table id="tabellaInfo" class="example-table">
+		<br><br><br>
+			<table id="tabellaInfo" class="stats-table">
 			<tr><th colspan="6">Riepilogo partita</th></tr>
 				<tr>
 					<td>Mosse:</td><td><div id="numeroMosse">0</div></td>
@@ -72,10 +73,10 @@
 		<div id="tab-gioco">
 			<!--Top-menù: principali bottoni di interazione-->
 			<div id="mainMenu">
-				<input type="button" value="Nuova partita" id="btnNuovaPartita" class="btn">
-				<input type="button" value="Hint" id="btnHint" class="btn">
-				<input type="button" value="Demo vittoria" id="btnDemoVittoria" class="btn">
-				<input type="button" value="Pausa" id="btnPausa" class="btn">
+				<input type="button" value="Nuova partita" id="btnNuovaPartita" class="btn ripple">
+				<input type="button" value="Hint" id="btnHint" class="btn ripple">
+				<input type="button" value="Demo vittoria" id="btnDemoVittoria" class="btn ripple">
+				<input type="button" value="Pausa" id="btnPausa" class="btn ripple">
 			</div>
 			<br><br>
 			<!--Contenitore mazzo superiore-->
