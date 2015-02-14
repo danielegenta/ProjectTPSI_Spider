@@ -444,7 +444,7 @@ function scalaEffettuata(contenuto, colonna)
 		$("#"+x+colonna).remove();
 	}
 	lunghezzaColonna= ($('#'+colonna).find('div').length)-1;
-	if(lunghezzaColonna!=1)
+	if(lunghezzaColonna!=0)
 	{
 		if (contenuto==undefined)
 		{
