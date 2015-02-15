@@ -17,7 +17,8 @@ $(document).ready(function()
 	$("#menuTab-Statistiche").hide();
 	$("#menuTab-Informazioni").hide();
 	$("#menuTab-SchermataIniziale").hide();
-	 $( "#tabs" ).tabs({active:0});
+	$( "#tabs" ).tabs({active:0});
+	$( "#tabs2" ).tabs({active:0});
 	//Funzione che richiede tramite input-box in nome del giocatore
 	//Intercetto eventi click sui bottoni principali
 	$("#btnNuovaPartita").click(function(){
