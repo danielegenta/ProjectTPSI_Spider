@@ -439,6 +439,7 @@ function scalaEffettuata(contenuto, colonna)
 {
 	var x, lunghezzaColonna, completamento;
 	mazziCompletati++;
+	$("#completed"+mazziCompletati).append('<img src="img/12.jpg">');
 	lunghezzaColonna= ($('#'+colonna).find('div').length)-1;			
 	for(x=lunghezzaColonna; x>(lunghezzaColonna-13); x--)
 	{
@@ -565,7 +566,7 @@ function inizializzaPartita()
 		 $( "#"+i ).remove();
 	 }
 	 $('#bottomDeck').html("");
-	 $('#bottomDeck').append('<img src="img/carta_retro.jpg">')
+	 $('#bottomDeck').append('<img src="img/carta_retro.jpg">');
 }
 
 
