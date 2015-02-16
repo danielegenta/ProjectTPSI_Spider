@@ -41,11 +41,13 @@ $(document).ready(function()
 		{
 			$("#btnPausa").attr("value","Pausa");
 			alert("Gioco ripreso");
+			 $("#topDeck, #bottomDeck, #completedDeck").foggy(false);
 		}
 		else 
 		{
 			$("#btnPausa").attr("value","Riprendi");
 			alert("Gioco in pausa");
+			$("#topDeck, #bottomDeck, #completedDeck").foggy();
 		}
 		pausa=!pausa;
 	});
