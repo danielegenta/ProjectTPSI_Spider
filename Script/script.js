@@ -13,10 +13,7 @@ var decineMinuti,unitaMinuti,decineSecondi,unitaSecondi,e,f,separatoreMinSec, cr
 */
 $(document).ready(function()
 {	
-	$("#menuTab-Gioco").hide();
-	$("#menuTab-Statistiche").hide();
-	$("#menuTab-Informazioni").hide();
-	$("#menuTab-SchermataIniziale").hide();
+	$("#menuTab-Gioco, #menuTab-Statistiche, #menuTab-Informazioni, #menuTab-SchermataIniziale, #menuTab-vittoria").hide();
 	$( "#tabs" ).tabs({active:0});
 	$( "#tabs2" ).tabs({active:0});
 	//Funzione che richiede tramite input-box in nome del giocatore
@@ -71,9 +68,7 @@ function inputGiocatore()
 		nomeGiocatore="Player 1";
 	$("#nomeGiocatore").html(nomeGiocatore);
 	$( "#tabs" ).tabs({active:2});
-	$("#menuTab-Gioco").show("slow");
-	$("#menuTab-Statistiche").show("slow");
-	$("#menuTab-Informazioni").show("slow");
+	$("#menuTab-Gioco, #menuTab-Statistiche, #menuTab-Informazioni").show("slow");
 }
 
 /*
@@ -100,7 +95,8 @@ function creazioneTopDecks()
 */
 function distribuzionePrimoMazzo()
 {
-	var i,j,id="";
+	var i,j, vecchioId;
+	var id="", classeDiv="", cella;
 	for (j=0; j<5; j++)
 	{
 		for (i = 0; i < 10; i++) 
@@ -109,16 +105,16 @@ function distribuzionePrimoMazzo()
 			generaNumeroCasuale();
 			if (j==0)
 				//I div che compongono la prima riga non hanno margin-top
-				var classeDiv = "coveredDeck0";
+				classeDiv = "coveredDeck0";
 			else
 				//I div che compongono tutte le altre righe hanno un margin top negativo (causa incastramento carte)
-    			var classeDiv = "coveredDeck";
-        	var cella = $('<div />');
+    			classeDiv = "coveredDeck";
+        	cella = $('<div />');
         	id=j+""+i;
         	//Assegno gli id automaticamente
         	if (j>0)
         	{
-        		var vecchioId=(j-1);
+        		vecchioId=(j-1);
         		vecchioId+=""+i;
         	}
         	//Assegno proprietà ai div
@@ -141,8 +137,8 @@ function distribuzionePrimoMazzo()
     for (i=0; i<4; i++)
     {
     		generaNumeroCasuale();
-    		var classeDiv = "coveredDeck";
-        	var cella = $('<div />');
+    		classeDiv = "coveredDeck";
+        	cella = $('<div />');
         	id="5"+i;
         	cella.attr("id", id);
         	cella.addClass(classeDiv);
@@ -374,7 +370,7 @@ function scopri(oldID)
 		riga=oldID.substring(1,2);
 	if (oldID.lenght==3)
 		riga=oldID.substring(2,3);
-	var scopri=$('#'+riga+' div:last').attr("id");
+	scopri=$('#'+riga+' div:last').attr("id");
 	precedenteHost=scopri;
 	console.log(precedenteHost);
 	//Giro la carta assegnandole una immagine il base al suo valore e la rendo draggabile
@@ -390,7 +386,7 @@ function scopri(oldID)
 function checkDrag()
 {
 	var scala=true;
-	var valoreScala=0, contenuto=0,colonna=0, i=0, scalaCompleta=0;
+	var valoreScala=0, contenuto=0,colonna=0, i=0, scalaCompleta=0, count;
 	//Aggiorno gli ID
 	checkID();
 	//Scorro le 10 colonne
@@ -399,7 +395,7 @@ function checkDrag()
 		scalaCompleta=0;
 		scala=true;
 		//Individuo la lunghezza della colonna (quante carte sono appese)
-		var count= ($('#'+colonna).find('div').length)-1;
+		count= ($('#'+colonna).find('div').length)-1;
 		//Effettuo una prima lettura fuori ciclo dell'ultima carta
 		contenuto=$('#'+colonna+ ' div:last').attr("value");
 		//Assegno il valore di confronto
@@ -557,9 +553,7 @@ function inizializzaPartita()
 	 newPartita=false;
 	 vincita=false;
 	 primaPartita=true;
-	 $("#menuTab-Gioco").hide();
-	 $("#menuTab-Statistiche").hide();
-	 $("#menuTab-Informazioni").hide();
+	 $("#menuTab-Gioco, #menuTab-Statistiche, #menuTab-Informazioni").hide();
 	 $( "#tabs" ).tabs({active:0});
 	 for (i=0; i<10; i++)
 	 {
