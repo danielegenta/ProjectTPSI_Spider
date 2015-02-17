@@ -181,7 +181,7 @@ color: rgb(111, 111, 111);
 /*
 	Piè di pagina
 */
-footer {color: black; font-family: "Great Vibes", cursive; font-size: 20px; line-height: 160px; font-weight: normal; margin-bottom: 0px; margin-top: 600px; text-align: center; text-shadow: 0 1px 1px #fff; }
+footer {color: black; font-family: "Roboto", cursive; font-size: 20px; line-height: 160px; font-weight: normal; margin-bottom: 0px; margin-top: 600px; text-align: center; text-shadow: 0 1px 1px #fff; }
 footer:hover {color: white;}
 
 /*
@@ -193,20 +193,18 @@ footer:hover {color: white;}
 	text-align: center;
 	margin-left: auto;
 	margin right: auto;
-	width:80%;
 }
 
-ul 
+.menu 
 {
-  text-align: center;
   vertical-align: centre;
   overflow: auto;
   list-style-type: none;
 }
  
-li 
+.sub-menu 
 {
-text-align:center;
+  text-align:center;
   height: 25px;
   float: left;
   margin-right: 0px;
@@ -214,11 +212,11 @@ text-align:center;
   padding: 0 20px;
 }
  
-li:last-child {
+.sub-menu:last-child {
   border-right: none;
 }
  
-li a 
+.sub-menu a 
 {
   text-decoration: none;
   color: #ccc;
@@ -232,12 +230,12 @@ li a
   transition: all 0.5s ease;
 }
  
-li a:hover 
+.sub-menu  a:hover 
 {
   color: #4285f4;
 }
  
-li.active a 
+.sub-menu.active a 
 {
   font-weight: bold;
   color: #333;
@@ -394,4 +392,18 @@ input:focus ~ .highlight {
   font-size:18px;
   font-weight:normal;
   overflow: scroll;
+}
+
+.flip
+{
+	height: 100px;
+	width: 100px;
+	background: red;
+	font-size: 50px;
+	overflow: scroll;
+}
+
+#textVittoria
+{
+	display: inline-block;
 }

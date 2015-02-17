@@ -18,6 +18,13 @@ $(document).ready(function()
 	$( "#tabs2" ).tabs({active:0});
 	//Funzione che richiede tramite input-box in nome del giocatore
 	//Intercetto eventi click sui bottoni principali
+	
+	$(".flip").mouseover(function(){
+		$(".flip").flip({
+			direction:'tb',
+		})
+	});
+	
 	$("#btnNuovaPartita").click(function(){
 		nuovaPartita();
 	});
@@ -28,11 +35,15 @@ $(document).ready(function()
 		alert("Partita in pausa")
 	});
 	$("#btnDemoVittoria").click(function(){
-		alert("Work in progress!")
+		$( "#tabs" ).tabs({active:4});
 	});
 	$("#btnUndo").click(function()
 	{
 		annullaMossa();
+	});
+	$("#btnNuovaPartitaVittoria").click(function()
+	{
+		nuovaPartita();
 	});
 	$("#btnPausa").click(function()
 	{
@@ -574,7 +585,7 @@ function controlloVittoria()
 	if (mazziCompletati==8)
 	{
 		alert("hai vinto!")
-		nuovaPartita();
+		$( "#tabs" ).tabs({active:4});
 	}
 }
 
@@ -650,7 +661,7 @@ function avviaCronometro(){
         if (stringaTempo=="00:00")
         {
         	clearInterval(cronometro);
-        	alert("Hai perso!");
+        	alert("Hai perso, il tempo è scaduto!");
         	nuovaPartita();
         }
         for ( i = 0; i < stringaTempo.length; i++ ) {
