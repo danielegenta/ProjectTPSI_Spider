@@ -1,4 +1,16 @@
 /*
+******Foglio di stile del gioco: Spider***************************
+******Sviluppato da: Genta, Massimino, Nikolov, Levrone***********
+******Classe: 4C INF 2014/2015************************************
+*/
+
+
+
+/*
+**************Classi legate ai principali macro-blocchi html********************
+*/
+
+/*
 	Intestazione, menù principale e tabella informazioni
 */
 header, #tabellaInfo, #mainMenu
@@ -7,6 +19,54 @@ header, #tabellaInfo, #mainMenu
 	margin-right:auto;
 	text-align:center;
 }
+
+p
+{
+  margin-top: 600px;
+}
+
+/*
+  Piè di pagina
+*/
+footer {color: black; font-family: "Roboto", cursive; font-size: 20px; line-height: 160px; font-weight: normal; margin-bottom: 0px; margin-top: 600px; text-align: center; text-shadow: 0 1px 1px #fff; }
+footer:hover {color: white;}
+
+/*
+  Classe applicata al body
+*/
+.main
+{
+   background: #00C853; 
+}
+
+/*
+**************Classi legate ai titoli******************
+*/
+/*
+  Titolo e sottotiolo
+*/
+
+h1
+{
+  display: inline;
+  position: relative;
+  font: 150px Helvetica, Sans-Serif;
+  letter-spacing: -5px;
+  color: rgba(0,0,255,0.5);
+}
+
+h1:after
+{
+  content: "Spider";
+  position: absolute; left: 10px; top: 5px;
+  color: rgba(255,0,0,0.5); 
+}
+
+h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-weight: 300; line-height: 32px; margin: 0 0 72px; text-align: center; }
+
+/*
+**************Classi legate alle carte****************
+*/
 
 /*
 	Mazzi superiori
@@ -74,12 +134,8 @@ header, #tabellaInfo, #mainMenu
 }
 
 /*
-	Classe applicata al body
+***************Classi legate ai bottoni**************
 */
-.main
-{
-	 background: #00C853; 
-}
 
 /*
 	Classe applicata a tutti i bottoni
@@ -117,38 +173,41 @@ header, #tabellaInfo, #mainMenu
  	background: #4285f4;color: white;
  }
 
-p
+/*
+  Bottone presente nel tab schermata iniziale
+*/
+.btnInizia 
 {
-	margin-top: 600px;
+    display: inline-block;
+      position: relative;
+      width: 120px;
+      height: 32px;
+      border-radius: 2px;
+      font-size: 0.9em;
+      text-align: center;
+      vertical-align: centre;
+      background-color: #4285f4;
+      color: #fff;
+      transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 0.2s;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    cursor: pointer;
 }
+
+.btnInizia:active
+{
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+  transition-delay: 0s;
+}
+
 
 /*
-	Titolo e sottotiolo
+********************Classi legate al tab statistiche*********************
 */
-
-h1
-{
-	display: inline;
-	position: relative;
-	font: 150px Helvetica, Sans-Serif;
-	letter-spacing: -5px;
-	color: rgba(0,0,255,0.5);
-}
-
-h1:after
-{
-	content: "Spider";
-	position: absolute; left: 10px; top: 5px;
-	color: rgba(255,0,0,0.5); 
-}
-
-h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-weight: 300; line-height: 32px; margin: 0 0 72px; text-align: center; }
-
 
 /*
 	Tabella informazioni su partita
 */
-
 .stats-table 
 {
 font-family: 'Roboto';
@@ -160,6 +219,9 @@ overflow: auto;
 display: block;
 }
 
+/*
+  Intestazione della tabella
+*/
 .stats-table th 
 {
 /*background-color: rgb(112, 196, 105);*/
@@ -170,6 +232,9 @@ padding: 20px 30px;
 text-align: center;
 }
 
+/*
+  Celle della tabella
+*/
 .stats-table td 
 {
 background-color: rgb(238, 238, 238);
@@ -178,21 +243,19 @@ color: rgb(111, 111, 111);
 }
 
 
+
 /*
-	Piè di pagina
+*********************Classi legate ai tab**********************
 */
-footer {color: black; font-family: "Roboto", cursive; font-size: 20px; line-height: 160px; font-weight: normal; margin-bottom: 0px; margin-top: 600px; text-align: center; text-shadow: 0 1px 1px #fff; }
-footer:hover {color: white;}
 
 /*
 	Menù di scelta tab
 */
-
 .menuTab
 {
 	text-align: center;
 	margin-left: auto;
-	margin right: auto;
+	margin-right: auto;
 }
 
 .menu 
@@ -242,12 +305,13 @@ footer:hover {color: white;}
 }
 
 
-
+/*
+********************Classi legate al tab schermata iniziale*********************
+*/
 
 /*
 	Input nome nella schermata iniziale
 */
-
 .container
 { 
   font-family:'Roboto';
@@ -348,30 +412,9 @@ input:focus ~ .highlight {
   margin-bottom:45px; 
 }
 
-.btnInizia 
-{
- 	  display: inline-block;
-      position: relative;
-      width: 120px;
-      height: 32px;
-      border-radius: 2px;
-      font-size: 0.9em;
-      text-align: center;
-      vertical-align: centre;
-      background-color: #4285f4;
-      color: #fff;
-      transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-	  transition-delay: 0.2s;
-	  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-	  cursor: pointer;
-}
-
-.btnInizia:active
-{
-	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
-	transition-delay: 0s;
-}
-
+/*
+********************Classi legate al tab informazioni**************
+*/
 #tab-informazioni
 {
 	font-family: 'Roboto';
@@ -394,16 +437,23 @@ input:focus ~ .highlight {
   overflow: scroll;
 }
 
+
+/*
+*******************Classi legate al tab vittoria*******************
+*/
 .flip
 {
 	height: 100px;
-	width: 100px;
+	width: auto;
 	background: red;
 	font-size: 50px;
 	overflow: scroll;
+	text-align: center;
+	font-family: "Roboto";
+	color: white;
 }
 
-#textVittoria
+.flip:hover
 {
-	display: inline-block;
+	color: #4285f4;
 }

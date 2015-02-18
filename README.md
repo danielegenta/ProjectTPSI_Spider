@@ -18,6 +18,8 @@ Major updates:
 0.6 fine spostamento multiplo e singolo, revisione del progetto (debug e documentazione)
 0.7 aggiunte nuove funzionalità: cronometro, conteggio mosse, aiuti, pausa
 0.8 passaggio al material design, interfaccia a tab, possibilità di annullare mossa
+0.9 aggiunta vittoria, fine presentazione
+1.0 limatura del progetto, documentazione e ottimizzazione 
 
 Ogni major update contiene miglioramenti e correzioni di bug.
 

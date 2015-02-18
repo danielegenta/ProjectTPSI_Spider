@@ -11,6 +11,7 @@
 		<script type="text/javascript" src="Script/offline/jquery.js"> </script>
 		<script type="text/javascript" src="Script/offline/jquery-ui.js"> </script>
 		<script type="text/javascript" src="Script/script.js"> </script>
+		<!--Collegamenti a plugin javascript-->
 		<script type="text/javascript" src="Script/foggy.js"> </script>
 		<script type="text/javascript" src="Script/jquery.flip.js"> </script>
 	</head>
@@ -24,13 +25,13 @@
 		<div id="tabs">
 			<!--Scelta del tab-->
 			<div class=menuTab>
-			<ul id="listaTabs" class="menu">
-				<li class="sub-menu" id="menuTab-SchermataIniziale"><a href="#tab-iniziale">Schermata iniziale</a></li>
-				<li class="sub-menu" id="menuTab-Statistiche"><a href="#tab-statistiche">Statistiche partita</a></li>
-				<li class="sub-menu" id="menuTab-Gioco"><a href="#tab-gioco">Partita</a></li>
-				<li class="sub-menu" id="menuTab-Informazioni"><a href="#tab-informazioni">Informazioni</a></li>
-				<li class="sub-menu" id="menuTab-Vittoria"><a href="#tab-vittoria">Vittoria</a></li>
-			</ul>
+				<ul id="listaTabs" class="menu">
+					<li class="sub-menu" id="menuTab-SchermataIniziale"><a href="#tab-iniziale">Schermata iniziale</a></li>
+					<li class="sub-menu" id="menuTab-Statistiche"><a href="#tab-statistiche">Statistiche partita</a></li>
+					<li class="sub-menu" id="menuTab-Gioco"><a href="#tab-gioco">Partita</a></li>
+					<li class="sub-menu" id="menuTab-Informazioni"><a href="#tab-informazioni">Informazioni</a></li>
+					<li class="sub-menu" id="menuTab-Vittoria"><a href="#tab-vittoria">Vittoria</a></li>
+				</ul>
 			</div>
 		<!--Tab di input del nome del giocatore-->
 		<div id="tab-iniziale">
@@ -44,7 +45,6 @@
      		 			<label>Nome giocatore</label>
     				</div>
  			 	</form>
- 			 	
 				<input type="button" value="Inzia la partita" id="btnInizia" class="btnInizia">
 			</div>
 		</div>
@@ -52,7 +52,9 @@
 		<div id="tab-statistiche">
 		<br><br><br>
 			<table id="tabellaInfo" class="stats-table">
-			<tr><th colspan="6">Riepilogo partita</th></tr>
+				<tr>
+					<th colspan="6">Riepilogo partita</th>
+				</tr>
 				<tr>
 					<td>Mosse:</td><td><div id="numeroMosse">0</div></td>
 					<td>Cronometro:</td><td><div id="counter">
@@ -84,6 +86,7 @@
 				<input type="button" value="Annulla mossa" id="btnUndo" class="btn">
 			</div>
 			<br><br>
+			<!--Riga delle scala completate-->
 			<div id="completedDeck">
 				<div id="completed1" class="topDecks"></div>
 				<div id="completed2" class="topDecks"></div>
@@ -104,7 +107,8 @@
 			</div>
 		</div>
 		<!--Tab di informazioni (come si gioca, crediti e regole)-->
-			<div id="tab-informazioni">
+		<div id="tab-informazioni">
+			<!--Scelta del sub-tab informazioni-->
 			<div id="tabs2">
 				<ul class="menu">
 					<li class="sub-menu"><a href="#tab2-regoleDelGioco">Regole del gioco</a></li>
@@ -168,15 +172,32 @@
 				</div>
 			</div>
 		</div>
-				<div id="tab-vittoria">
-					<div id="textVittoria">
-						<div  class="flip">C</div>
-						<div  class="flip">O</div>
-					</div>
-					<input type="button" value="Nuova partita" id="btnNuovaPartitaVittoria" class="btn">
+		<!--Tab della schermata vittoria-->
+		<div id="tab-vittoria">
+			<div class="container">
+				<table>
+					<tr>
+						<td class="flip">C</td>
+						<td class="flip">O</td>
+						<td class="flip">M</td>
+						<td class="flip">P</td>
+						<td class="flip">L</td>
+						<td class="flip">I</td>
+						<td class="flip">M</td>
+						<td class="flip">E</td>
+						<td class="flip">N</td>
+						<td class="flip">T</td>
+						<td class="flip">I</td>
+					</tr>
+					<tr>
+						<td><b>Nome:</b></td><td id="nomeVittoria" colspan="2"></td><td><b>Punteggio:</b></td><td id="punteggioVittoria" colspan="2"></td>
+					</tr>
+				</table>
+				<input type="button" value="Nuova partita" id="btnNuovaPartitaVittoria" class="btn">
 				</div>
-			</div
-		</div>
+			</div>
+		</div>	
+	</div>
 		<!--Piè di pagina-->
 		<footer>
 			Gruppo: Daniele Genta, Davide Massimino, Mite Nikolov e Samuele Levrone.

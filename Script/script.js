@@ -13,18 +13,16 @@ var decineMinuti,unitaMinuti,decineSecondi,unitaSecondi,e,f,separatoreMinSec, cr
 */
 $(document).ready(function()
 {	
+	//Seleziono il tab schermata iniziale e nascondo tutti gli altri
 	$("#menuTab-Gioco, #menuTab-Statistiche, #menuTab-Informazioni, #menuTab-SchermataIniziale, #menuTab-vittoria").hide();
 	$( "#tabs" ).tabs({active:0});
 	$( "#tabs2" ).tabs({active:0});
-	//Funzione che richiede tramite input-box in nome del giocatore
 	//Intercetto eventi click sui bottoni principali
-	
 	$(".flip").mouseover(function(){
 		$(".flip").flip({
 			direction:'tb',
 		})
 	});
-	
 	$("#btnNuovaPartita").click(function(){
 		nuovaPartita();
 	});
@@ -35,7 +33,7 @@ $(document).ready(function()
 		alert("Partita in pausa")
 	});
 	$("#btnDemoVittoria").click(function(){
-		$( "#tabs" ).tabs({active:4});
+		gestisciVincita();
 	});
 	$("#btnUndo").click(function()
 	{
@@ -174,31 +172,29 @@ function distribuisciCarte()
 {
 	if (scorriTempo==true)
 	{
-	if (pausa==false)
-	{
-	if (distribuisci<=4)
-	{
-		for (i=0; i<10; i++)
+		if (pausa==false)
 		{
-			generaNumeroCasuale();
-			appendiCarta(i, num);
+			if (distribuisci<=4)
+			{
+				for (i=0; i<10; i++)
+				{
+					generaNumeroCasuale();
+					appendiCarta(i, num);
+				}
+				distribuisci++;
+				//Richiamo procedure di 'assestamento' e revisione delle carte
+				azzeraDrag();
+				checkID();
+				drop();
+				drag();
+				checkDrag();
+			}
+			//Se il mazzo è esaurito
+			if (distribuisci==5)
+				$("#bottomDeck").html("Carte esaurite!");
 		}
-		distribuisci++;
-		//Richiamo procedure di 'assestamento' e revisione delle carte
-		azzeraDrag();
-		checkID();
-		drop();
-		drag();
-		checkDrag();
-	}
-	//Se il mazzo è esaurito
-	if (distribuisci==5)
-	{
-		$("#bottomDeck").html("Carte esaurite!");
-	}
-	}
-	else
-		alert("Il gioco e' in pausa, per effetturare l'operazione prima riprenderlo");
+		else
+			alert("Il gioco e' in pausa, per effetturare l'operazione prima riprenderlo");
 	}
 	else
 		alert("Partita non ancora iniziata");
@@ -258,9 +254,7 @@ function mostraCarte(cella, id)
 function generaNumeroCasuale()
 {
 	do
-	{
 		num = Math.round(12*Math.random());
-	}
 	while (carte[num]>7)
 	carte[num]++;
 }
@@ -443,25 +437,27 @@ function checkDrag()
 	drag();
 }
 
-
+/*
+*	Funzione che gestisce una scala quando essa viene completata
+*/
 function scalaEffettuata(contenuto, colonna)
 {
 	var x, lunghezzaColonna, completamento;
 	mazziCompletati++;
+	//Appendo alla riga dei mazzi completati l'immagine del re
 	$("#completed"+mazziCompletati).append('<img src="img/12.jpg">');
-	lunghezzaColonna= ($('#'+colonna).find('div').length)-1;			
+	lunghezzaColonna= ($('#'+colonna).find('div').length)-1;		
+	//Rimuovo le carte che compongono la scala	
 	for(x=lunghezzaColonna; x>(lunghezzaColonna-13); x--)
-	{
 		$("#"+x+colonna).remove();
-	}
 	lunghezzaColonna= ($('#'+colonna).find('div').length)-1;
-	if(lunghezzaColonna!=0)
+	//Se prima della scala c'era una carta coperta, la scopro
+	if(lunghezzaColonna != 0)
 	{
-		if (contenuto==undefined)
-		{
+		if (contenuto == undefined)
 			scopri($('#'+lunghezzaColonna+colonna).attr("id"));
-		}			
 	}
+	//Aggiorno la progressbar ed il punteggio
 	completamento=(12,5*mazziCompletati);
 	$("#completamento").attr("value", completamento);
 	cambiaPunteggio(100);
@@ -511,7 +507,7 @@ function checkID ()
 }
 
 /*
-*	Funzione che gestisce l0aumento delle mosse
+*	Funzione che gestisce l'aumento delle mosse ed aggiorna in punteggio
 */
 function aumentaMosse()
 {
@@ -521,10 +517,6 @@ function aumentaMosse()
 	nMosse=$("#numeroMosse").html(nMosse);
 	cambiaPunteggio(-1);
 }
-
-/*
-*	Funzioni ancora da fare/finire
-*/
 
 /*
 *	Funzione che re-inizializza la partita
@@ -567,31 +559,46 @@ function inizializzaPartita()
 	 vincita=false;
 	 primaPartita=true;
 	 $("#punteggio").html("500");
+	 $("#numeroMosse").html("0");
+	 $("#completamento").attr("value","0");
 	 $("#menuTab-Gioco, #menuTab-Statistiche, #menuTab-Informazioni").hide();
 	 $( "#tabs" ).tabs({active:0});
 	 for (i=0; i<10; i++)
-	 {
 		 $( "#"+i ).remove();
-	 }
 	 $('#bottomDeck').html("");
 	 $('#bottomDeck').append('<img src="img/carta_retro.jpg">');
 }
 
 
 /*
-* 	Funzione che gestisce la vittoria
+* 	Funzione che gestisce la vittoria effettuata da gioco
 */
 function controlloVittoria()
 {
 	if (mazziCompletati==8)
 	{
-		alert("hai vinto!")
-		$( "#tabs" ).tabs({active:4});
+		gestisciVincita();
 	}
 }
 
+/*
+*	Funzione che si occupa di gestire la vittoria (da gioco e da btn demo vittoria)
+*/
+function gestisciVincita()
+{
+	var nome, punteggio;
+	//Attivo il tab schermata vittoria, nascondo gli altri
+	$("#menuTab-Gioco, #menuTab-Statistiche, #menuTab-Informazioni, #menuTab-SchermataIniziale, #menuTab-vittoria").hide();
+	//Mostro punteggio e nome del vincitore
+	nome=$("#nomeGiocatore").html();
+	punteggio=$("#punteggio").html();
+	$("#nomeVittoria").html(nome);
+	$("#punteggioVittoria").html(punteggio);
+	$( "#tabs" ).tabs({active:4});
+}
 
-//------Funzioni legate a cronometro-------
+
+//********Funzioni legate a cronometro*********
 /*
 *	Funzione che gestisce il cronometro
 */
@@ -662,18 +669,18 @@ function avviaCronometro(){
         if (stringaTempo=="00:00")
         {
         	clearInterval(cronometro);
-        	alert("Hai perso, il tempo è scaduto!");
+        	//Se il timer scade si perde e inizializzo una nuova partita
+        	alert("Hai perso, il tempo &egrave scaduto!");
         	nuovaPartita();
         }
-        for ( i = 0; i < stringaTempo.length; i++ ) {
+        for ( i = 0; i < stringaTempo.length; i++ ) 
             $("#s" + i).html(stringaTempo.charAt(i))
-        }
     }
 }
 
 
 /*
-*	Funzione che gestisce gli aiuti
+*	Funzione che gestisce gli aiuti (su ultima colonna)
 */
 function aiuti()
 {
@@ -703,14 +710,13 @@ function aiuti()
 		i++
 	}
 	while (aiuto==true && i<10)
+	//Aggiorno il punteggio
 	if (aiuto==false)
-	{
 		cambiaPunteggio(-10)
-	}
 }
 
 /*
-* 	Funzione che gestisce le carte evidenziate 
+* 	Funzione che gestisce le carte evidenziate (aiuto)
 */
 function evidenziaCarte(riga, riga2, i, colonna)
 {
@@ -739,24 +745,24 @@ function evidenziaCarte(riga, riga2, i, colonna)
 }
 
 /*
-*	Funzione che gestisce l'undo della mossa
+*	Funzione che gestisce l'undo della mossa (aiuto #2)
 */
 function annullaMossa()
 {
-		if  (ultimaAppesa!=-1 && precedenteHost!=-1)
-		{
-			ultimaAppesa-=10;
-			precedenteHost-=10;
-			$("#"+precedenteHost).append($("#"+ultimaAppesa));
-			cambiaPunteggio(-10)
-			ultimaAppesa=-1
-			precedenteHost=-1
-			azzeraDrag();
-			checkID();
-			drop();
-			drag();
-			checkDrag();
-		}
+	if  (ultimaAppesa!=-1 && precedenteHost!=-1)
+	{
+		ultimaAppesa-=10;
+		precedenteHost-=10;
+		$("#"+precedenteHost).append($("#"+ultimaAppesa));
+		cambiaPunteggio(-10)
+		ultimaAppesa=-1
+		precedenteHost=-1
+		azzeraDrag();
+		checkID();
+		drop();
+		drag();
+		checkDrag();
+	}
 }
 
 /*
