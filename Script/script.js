@@ -566,6 +566,7 @@ function inizializzaPartita()
 	 newPartita=false;
 	 vincita=false;
 	 primaPartita=true;
+	 $("#punteggio").html("500");
 	 $("#menuTab-Gioco, #menuTab-Statistiche, #menuTab-Informazioni").hide();
 	 $( "#tabs" ).tabs({active:0});
 	 for (i=0; i<10; i++)
