@@ -17,6 +17,10 @@ $(document).ready(function()
 	$("#menuTab-Gioco, #menuTab-Statistiche, #menuTab-Informazioni, #menuTab-SchermataIniziale, #menuTab-vittoria").hide();
 	$( "#tabs" ).tabs({active:0});
 	$( "#tabs2" ).tabs({active:0});
+	
+	
+	$("#test").hide();
+	
 	//Intercetto eventi click sui bottoni principali
 	$(".flip").mouseover(function(){
 		$(".flip").flip({
@@ -25,6 +29,10 @@ $(document).ready(function()
 	});
 	$("#btnNuovaPartita").click(function(){
 		nuovaPartita();
+	});
+	$("#menuTab-Statistiche").mouseover(function(){
+		$("#test").show("slow");
+		$("#test").hide(1000);
 	});
 	$("#btnHint").click(function(){
 	if (pausa==false)
@@ -307,6 +315,11 @@ function drop()
 				//Appendo la carta alla colonna desiderata, le assegno il nuovo id e la rendo draggable
 				$('#'+idDrop+' div:last').append($("#"+idDrag));
 				$("#"+idDrag).attr("id",nID);
+				
+				
+				$( "#"+nID).css("top","");
+						$( "#"+nID).css("left","");	
+				
 				$( "#"+nID).draggable({revert:true});
 				//!!fare controllo su scopri (ultima carta)
 				//Se sto spostando la carta da una colonna vuota  cambio classe (margin-top)
@@ -352,8 +365,20 @@ function drop()
 						oldID = idDrag;
 						$('#'+idDrop).append($("#"+idDrag));
 						$("#"+idDrag).attr("id",nID);
+						
+						
+						$( "#"+nID).css("top","");
+						$( "#"+nID).css("left","");	
+						
+						
 						$( "#"+nID).draggable({revert:true});
 						ultimaAppesa=nID;
+						
+						
+						
+						
+						
+						
 						//!!fare controllo su scopri (ultima carta)
 						//Cambio dinamicamente la classe (margin-top)
 						$("#"+nID).removeClass("coveredDeck").addClass("coveredDeck0");
@@ -721,12 +746,12 @@ function aiuti()
 function evidenziaCarte(riga, riga2, i, colonna)
 {
 	//Le carte rimangono evidenziate (bordo giallo) per un secondo e poi tornano normali
-	$('#'+riga+i).addClass("cardHighlighted",1000);
+	$('#'+riga+i).addClass("cardHighlighted",2000).stop(true,true);
 	if (riga>0)
 		$('#'+riga+i).removeClass("coveredDeck");
 	else
 		$('#'+riga+i).removeClass("coveredDeck0");
-	$('#'+riga2+colonna).addClass("cardHighlighted",1000);
+	$('#'+riga2+colonna).addClass("cardHighlighted",2000).stop(true,true);
 	if (riga2>0)
 		$('#'+riga2+colonna).removeClass("coveredDeck");
 	else
@@ -736,12 +761,12 @@ function evidenziaCarte(riga, riga2, i, colonna)
 			$('#'+riga+i).addClass("coveredDeck");
 		else
 			$('#'+riga+i).addClass("coveredDeck0");
-		$('#'+riga+i).removeClass("cardHighlighted", 1000);
+		$('#'+riga+i).removeClass("cardHighlighted", 2000);
 		if (riga2>0)
 			$('#'+riga2+colonna).addClass("coveredDeck");
 		else
 			$('#'+riga2+colonna).addClass("coveredDeck0");
-		$('#'+riga2+colonna).removeClass("cardHighlighted", 1000);
+		$('#'+riga2+colonna).removeClass("cardHighlighted", 2000);
 }
 
 /*

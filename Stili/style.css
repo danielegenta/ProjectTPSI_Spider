@@ -74,12 +74,13 @@ h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-we
 .topDecks
 {
 	border:2px solid black;
-	width:80px;
+	width:75px;
     height:100px;
 	display: inline-block;
 	margin-left:20px;
 	float: left;
 	cursor: pointer;
+
 }
 
 /*
@@ -110,7 +111,7 @@ h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-we
 .coveredDeck
 {
 	height:100px;
-	margin-top:-50px;
+	margin-top:-60px;
 	cursor: pointer;
 }
 
@@ -120,7 +121,7 @@ h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-we
 .cardHighlighted
 {
 	height:100px;
-	margin-top:-50px;
+	margin-top:-60px;
 	border: 6px solid yellow;
 }
 
@@ -161,7 +162,7 @@ h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-we
   width: 16.795%; /* auto */
   text-align: center; /* DELETE WHEN WIDTH AUTO */
   background: none repeat scroll 0 0 $dark;
-  color: $white;
+  color: #4285f4;
   cursor: pointer;
 }
 
@@ -210,13 +211,13 @@ h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-we
 */
 .stats-table 
 {
-font-family: 'Roboto';
--webkit-font-smoothing: antialiased;
-font-size: 200%;
-width: 80%;
-height: 300px;
-overflow: auto;
-display: block;
+	font-family: 'Roboto';
+	-webkit-font-smoothing: antialiased;	
+	font-size: 200%;
+	width: 80%;
+	height: 300px;
+	overflow: auto;	
+	display: block;
 }
 
 /*
