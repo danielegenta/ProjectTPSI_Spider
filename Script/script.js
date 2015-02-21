@@ -17,9 +17,7 @@ $(document).ready(function()
 	$("#menuTab-Gioco, #menuTab-Statistiche, #menuTab-Informazioni, #menuTab-SchermataIniziale, #menuTab-vittoria").hide();
 	$( "#tabs" ).tabs({active:0});
 	$( "#tabs2" ).tabs({active:0});
-	
-	
-	$("#test").hide();
+	$("#statisticheVeloci").hide();
 	
 	//Intercetto eventi click sui bottoni principali
 	$(".flip").mouseover(function(){
@@ -31,8 +29,10 @@ $(document).ready(function()
 		nuovaPartita();
 	});
 	$("#menuTab-Statistiche").mouseover(function(){
-		$("#test").show("slow");
-		$("#test").hide(1000);
+		$("#statisticheVeloci").show("slow");
+	});
+	$("#menuTab-Statistiche").mouseleave(function(){
+		$("#statisticheVeloci").hide("slow");
 	});
 	$("#btnHint").click(function(){
 	if (pausa==false)
@@ -315,13 +315,9 @@ function drop()
 				//Appendo la carta alla colonna desiderata, le assegno il nuovo id e la rendo draggable
 				$('#'+idDrop+' div:last').append($("#"+idDrag));
 				$("#"+idDrag).attr("id",nID);
-				
-				
 				$( "#"+nID).css("top","");
-						$( "#"+nID).css("left","");	
-				
+				$( "#"+nID).css("left","");	
 				$( "#"+nID).draggable({revert:true});
-				//!!fare controllo su scopri (ultima carta)
 				//Se sto spostando la carta da una colonna vuota  cambio classe (margin-top)
 				tmp=oldID.substring(0,1)
 				if (tmp=="0")
@@ -365,21 +361,10 @@ function drop()
 						oldID = idDrag;
 						$('#'+idDrop).append($("#"+idDrag));
 						$("#"+idDrag).attr("id",nID);
-						
-						
 						$( "#"+nID).css("top","");
 						$( "#"+nID).css("left","");	
-						
-						
 						$( "#"+nID).draggable({revert:true});
-						ultimaAppesa=nID;
-						
-						
-						
-						
-						
-						
-						//!!fare controllo su scopri (ultima carta)
+						ultimaAppesa=nID;					
 						//Cambio dinamicamente la classe (margin-top)
 						$("#"+nID).removeClass("coveredDeck").addClass("coveredDeck0");
 						scopri(oldID);
@@ -699,7 +684,8 @@ function avviaCronometro(){
         	nuovaPartita();
         }
         for ( i = 0; i < stringaTempo.length; i++ ) 
-            $("#s" + i).html(stringaTempo.charAt(i))
+            $("#s" + i).html(stringaTempo.charAt(i));
+        mostraStatisticheVeloci();
     }
 }
 
@@ -798,4 +784,17 @@ function cambiaPunteggio(offset)
 	punteggio=parseInt($("#punteggio").html());
 	if (punteggio>0)
 		$("#punteggio").html(punteggio+offset);
+}
+
+function mostraStatisticheVeloci()
+{
+	var tempo="", mosse, punteggio;
+	punteggio=$("#punteggio").html();
+	mosse=$("#numeroMosse").html();
+	
+	for ( i = 0; i < stringaTempo.length; i++ ) 
+            tempo+=$("#s" + i).html();
+	$("#statisticheVeloci-punteggio").html(punteggio);
+	$("#statisticheVeloci-tempo").html(tempo);
+	$("#statisticheVeloci-mosse").html(mosse);
 }

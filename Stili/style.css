@@ -202,6 +202,14 @@ h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 15px; font-we
 }
 
 
+
+
+
+
+/*
+*********************Classi legate ai tab**********************
+*/
+
 /*
 ********************Classi legate al tab statistiche*********************
 */
@@ -241,13 +249,7 @@ text-align: center;
 background-color: rgb(238, 238, 238);
 padding: 20px 30px;
 color: rgb(111, 111, 111);
-}
-
-
-
-/*
-*********************Classi legate ai tab**********************
-*/
+}s
 
 /*
 	Menù di scelta tab
@@ -303,6 +305,17 @@ color: rgb(111, 111, 111);
 {
   font-weight: bold;
   color: #333;
+}
+
+#statisticheVeloci
+{
+	height: auto;
+	width: 200px;
+	border: 2px solid black;
+	background-color: white;
+	border-radius: 30px;
+	text-align: center;
+	vertical-align: centre;
 }
 
 
